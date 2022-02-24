@@ -1,0 +1,1 @@
+ response.xpath('//tbody/tr/td[@class="td-change1h change1h stat-percent text-right col-market"]/@data-sort').getall();
