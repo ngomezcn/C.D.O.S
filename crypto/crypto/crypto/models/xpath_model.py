@@ -7,6 +7,6 @@ class xpath():
         last_added = "//td[@class='trade p-0 col-market pl-2 text-center']/text()"
         
     class coin():
-        contract = "//div[@class='tw-col-span-3 lg:tw-col-span-1 coin-links-section lg:tw-ml-6']/div[@class='tw-hidden lg:tw-block tw-flex flex-column tw-mx-2 lg:tw-mx-3']/div[@class='coin-link-row tw-mb-0'][1]/div[@class='tw-flex']/div[@class='tw-px-2.5 tw-flex tw-items-center tw-justify-center tw-py-1 tw-h-7 tw-my-0.5 tw-rounded-md tw-text-sm tw-font-medium tw-bg-gray-100 tw-text-gray-800 dark:tw-text-white dark:tw-bg-opacity-10 hover:tw-bg-gray-200 dark:hover:tw-bg-opacity-20 tw-rounded-l-md']/i/@data-address"
+        contract = "//i/@data-address"
         chain = "//div[@class='tw-px-2.5 tw-flex tw-items-center tw-justify-center tw-py-1 tw-h-7 tw-my-0.5 tw-rounded-md  tw-text-sm tw-font-medium tw-bg-gray-100 tw-text-gray-800 dark:tw-text-white dark:tw-bg-opacity-10 hover:tw-bg-gray-200 dark:hover:tw-bg-opacity-20 tw-rounded-l-md']/span[@class='text-muted mr-2']/span/img/@src"
         

@@ -21,6 +21,10 @@ class CoingeckoSpider(scrapy.Spider):
         'FEED_EXPORT_ENCODING': 'utf-8'
     }
 
+    def __init__(self, name=None, **kwargs):
+        super().__init__(name, **kwargs)
+        sprint("Starting spider", self.name)
+
     def parse_coin(self, response, **kwargs):
         if kwargs:
             coin = Coin(

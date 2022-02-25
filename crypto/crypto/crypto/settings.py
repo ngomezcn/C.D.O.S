@@ -19,6 +19,12 @@ NEWSPIDER_MODULE = 'crypto.spiders'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
+# Using custom feed storage base class
+FEED_STORAGES_BASE = {
+    '': 'crypto.models.file_feed_storage.OverwriteFileFeedStorage',
+    'file': 'crypto.models.file_feed_storage.OverwriteFileFeedStorage',
+}
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
@@ -87,7 +93,3 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-FEED_STORAGES_BASE = {
-    '': 'crypto.models.OverwriteFileFeedStorage.OverwriteFileFeedStorage',
-    'file': 'crypto.models.OverwriteFileFeedStorage.OverwriteFileFeedStorage',
-}

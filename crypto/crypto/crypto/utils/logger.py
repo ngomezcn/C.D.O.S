@@ -1,23 +1,19 @@
 from os.path import exists
 import os
 from datetime import datetime
+from tracemalloc import start
 
 def sprint(*argv):
-    print("\n")
-    print("="*20)
-    print("\n")
     
     rprint = ""
     for i in argv:
-        rprint += ''.join(i)
+        rprint += ''.join(i).strip("\n")+" "
         
-    print(rprint, end=" ")
-    log(rprint, sprint_log=True)
     
-    print("\n")
-    print("="*20)
-    print("\n")
-    print("\n")
+    print("="*len(rprint))
+    log(rprint, sprint_log=True)
+    print(rprint)
+    print("="*len(rprint))
 
 
 def log(*argv, sprint_log = False):
