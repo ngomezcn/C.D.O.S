@@ -16,7 +16,7 @@ class CoingeckoSpider(scrapy.Spider):
     name = 'coingecko'
     start_urls = ['https://www.coingecko.com/en/coins/recently_added']
     custom_settings = {
-        'FEED_URI': 'data/recently_added.json',
+        'FEED_URI': '../../../data/recently_added.json',
         'FEED_FORMAT': 'json',
         'ROBOTSTXT-OBEY': False,
         'FEED_EXPORT_ENCODING': 'utf-8'
