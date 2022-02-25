@@ -21,8 +21,6 @@ class CoingeckoSpider(scrapy.Spider):
         'FEED_EXPORT_ENCODING': 'utf-8'
     }
 
-    
-    
     def parse_coin(self, response, **kwargs):
         if kwargs:
             coin = Coin(
@@ -36,6 +34,7 @@ class CoingeckoSpider(scrapy.Spider):
         
         yield {
             coin.name: {
+                "name": coin.name,
                 "id": coin.id,
                 "href": coin.href,
                 "contract": coin.contract,
@@ -54,7 +53,7 @@ class CoingeckoSpider(scrapy.Spider):
             if is_over_a_day(last_added[i]):
                 yield response.follow(hrefs[i], callback=self.parse_coin, cb_kwargs={'name': names[i], 'id': IDs[i], 'href': hrefs[i]})
             
-        yield {
-            "_comment": "This file will be overwrited every time coingecko is scraped.",
-            "date": datetime.now(),
-        }       
+        #yield {
+        #    "_comment": "This file will be overwrited every time coingecko is scraped.",
+        #    "date": datetime.now(),
+        #}       
