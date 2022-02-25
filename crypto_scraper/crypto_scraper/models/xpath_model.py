@@ -13,4 +13,6 @@ class xpath():
     
     class poocoin():
         class tokens():
-            
+            price = "//div[@class='d-flex align-items-start flex-wrap']/div[@class='mt-1 ps-2 d-flex align-items-center flex-grow-1']/div/div[@class='d-flex flex-wrap']/div[@class='mb-1 d-flex flex-column lh-1']/span[@class='text-success']/text()"
+            market_cap = "//div[@id='root']/div[@class='d-flex flex-grow-1 bg-dark justify-content-center aos-init aos-animate']/div[@class='d-none d-md-flex flex-column flex-grow-1']/div[@class='d-flex flex-column flex-grow-1 pe-2']/div[@class='d-flex flex-grow-1 flex-row position-relative']/div[@class='TokenChart_stats__3732U d-block bg-dark-1 shadow pt-3 text-small']/div[@class='px-3']/span[@class='text-success']/text()[2]"
+            total_supply = "//div[@id='root']/div[@class='d-flex flex-grow-1 bg-dark justify-content-center aos-init aos-animate']/div[@class='d-none d-md-flex flex-column flex-grow-1']/div[@class='d-flex flex-column flex-grow-1 pe-2']/div[@class='d-flex flex-grow-1 flex-row position-relative']/div[@class='TokenChart_stats__3732U d-block bg-dark-1 shadow pt-3 text-small']/div[@class='px-3']/text()[2]"
