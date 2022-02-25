@@ -9,7 +9,7 @@ def sprint(*argv):
     
     rprint = ""
     for i in argv:
-        rprint += i
+        rprint += ''.join(i)
         
     print(rprint, end=" ")
     log(rprint, sprint_log=True)
@@ -51,14 +51,12 @@ def format_log(argv, sprint_log):
     
     if sprint_log:
         for i in argv:
-            rlog += str(i)
+            rlog += ''.join(i)
         flog = str(datetime.now().replace(microsecond=0)) + ": " + rlog + '\n'
         return flog
     else:
         for i in argv:
             rlog += str(i)
-        flog = "(print) " + str(datetime.now().replace(microsecond=0)) + ": " + rlog + '\n'
+        flog = "(print) " + ''.join(datetime.now().replace(microsecond=0)) + ": " + rlog + '\n'
         return flog
     
-log("hola amigos de youtube")
-sprint("bon dia amics meus")

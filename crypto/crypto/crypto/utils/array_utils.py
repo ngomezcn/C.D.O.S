@@ -9,11 +9,9 @@ def erase_line_jump(arr):
         
     return arr
 
-
 def is_over_a_day(str):
     if str != '1 day':
         if 'hour' in str:
             return True
 
-    log()
     return False

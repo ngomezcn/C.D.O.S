@@ -6,19 +6,10 @@ from datetime import datetime
 
 from crypto.utils.array_utils import *
 from crypto.utils.chain_utils import *
-from scrapy.extensions.feedexport import FileFeedStorage #https://stackoverflow.com/questions/33140457/scrapy-overwrite-json-files-instead-of-appending-the-file/33487592
 from crypto.models.coin_model import *
 from crypto.models.xpath_model import *
 from crypto.models.chains_model import *
 from crypto.utils.logger import sprint
-
-# Subclas to overwrite export file
-class CustomFileFeedStorage(FileFeedStorage):
-    def open(self, spider):
-        dirname = os.path.dirname(self.path)
-        if dirname and not os.path.exists(dirname):
-            os.makedirs(dirname)
-        return open(self.path, 'wb')
 
 class CoingeckoSpider(scrapy.Spider):
     name = 'coingecko'
@@ -30,6 +21,8 @@ class CoingeckoSpider(scrapy.Spider):
         'FEED_EXPORT_ENCODING': 'utf-8'
     }
 
+    
+    
     def parse_coin(self, response, **kwargs):
         if kwargs:
             coin = Coin(
@@ -57,13 +50,11 @@ class CoingeckoSpider(scrapy.Spider):
         hrefs = response.xpath(xpath.recently_added.coin_href).getall()
         last_added = erase_line_jump(response.xpath(xpath.recently_added.last_added).getall())
 
-        sprint(last_added)
-
         for i in range(len(names)):
             if is_over_a_day(last_added[i]):
                 yield response.follow(hrefs[i], callback=self.parse_coin, cb_kwargs={'name': names[i], 'id': IDs[i], 'href': hrefs[i]})
             
-        return {
+        yield {
             "_comment": "This file will be overwrited every time coingecko is scraped.",
             "date": datetime.now(),
         }       
