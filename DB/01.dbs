@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="test" id="Project-1ae5" database="PostgreSQL" >
+	<schema name="test" >
+		<table name="chain" prior="tbl" generator_rows="100" >
+			<column name="chain_id" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="chain_name" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="pk_tbl" unique="PRIMARY_KEY" >
+				<column name="chain_id" />
+			</index>
+		</table>
+		<table name="coin" prior="coins" generator_rows="150" >
+			<column name="coin_id" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="coin_name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="coin_price" type="double precision" jt="3" mandatory="y" />
+			<column name="fk_chain_id" type="varchar" jt="12" mandatory="y" />
+			<index name="pk_coin" unique="PRIMARY_KEY" >
+				<column name="coin_id" />
+			</index>
+			<fk name="fk_chain_id" to_schema="test" to_table="chain" >
+				<fk_column name="fk_chain_id" pk="chain_id" />
+			</fk>
+		</table>
+		<table name="token" prior="tbl" generator_rows="150" >
+			<column name="token_contract" prior="contract" type="varchar" length="42" jt="12" mandatory="y" />
+			<column name="token_id" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="total_suppy" type="bigint" jt="-5" />
+			<column name="market_cap" type="double precision" jt="3" />
+			<column name="discovery_timestamp" type="timestamp" length="12" jt="93" >
+				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
+			</column>
+			<column name="launched_timestamp" type="timestamp" length="12" jt="93" />
+			<column name="price_history" type="json" jt="2000" mandatory="y" />
+			<column name="token_name" prior="name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="fk_chain_id" type="varchar" jt="12" mandatory="y" />
+			<index name="pk_token" unique="PRIMARY_KEY" >
+				<column name="token_contract" />
+			</index>
+			<fk name="fk_chain_id" to_schema="test" to_table="chain" >
+				<fk_column name="fk_chain_id" pk="chain_id" />
+			</fk>
+		</table>
+		<table name="wallet" prior="tbl" generator_rows="100" >
+			<column name="net_worth" type="bigint" jt="-5" mandatory="y" >
+				<defo><![CDATA[0.0]]></defo>
+			</column>
+			<column name="wallet_address" type="varchar" length="34" jt="12" mandatory="y" />
+			<index name="pk_wallet" unique="PRIMARY_KEY" >
+				<column name="wallet_address" />
+			</index>
+		</table>
+	</schema>
+	<connector name="MyDb" database="MySql" host="localhost" port="3306" user="root" />
+	<layout name="Default Layout" id="Layout-672" show_relation="columns" >
+		<entity schema="test" name="chain" color="C1D8EE" x="528" y="256" />
+		<entity schema="test" name="coin" color="C1D8EE" x="528" y="48" />
+		<entity schema="test" name="token" color="E5EEC1" x="240" y="176" />
+		<entity schema="test" name="wallet" color="C1D8EE" x="48" y="64" />
+		<form name="Report" id="Report-1131" template="Page" css="container-fluid" view="frame" >
+			<body name="Body" template="Grid" pos="0,0,0,0,f,f" layout="{{-2},{-2}}" scroll="n" html="n" />
+		</form>
+	</layout>
+</project>

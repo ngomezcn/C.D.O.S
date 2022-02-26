@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="test" id="Project-1ae5" database="PostgreSQL" >
+	<schema name="test" >
+		<table name="chain" prior="tbl" generator_rows="100" >
+			<column name="chain_id" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="chain_name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="fk_coin_id" type="varchar" jt="12" />
+			<index name="pk_tbl" unique="PRIMARY_KEY" >
+				<column name="chain_id" />
+			</index>
+			<fk name="fk_coin_id" to_schema="test" to_table="coin" >
+				<fk_column name="fk_coin_id" pk="coin_id" />
+			</fk>
+		</table>
+		<table name="coin" prior="coins" generator_rows="150" >
+			<column name="coin_id" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="coin_name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="coin_price" type="double precision" jt="3" mandatory="y" />
+			<column name="fk_chain_id" type="varchar" jt="12" mandatory="y" />
+			<index name="pk_coin" unique="PRIMARY_KEY" >
+				<column name="coin_id" />
+			</index>
+			<fk name="fk_chain_id" to_schema="test" to_table="chain" >
+				<fk_column name="fk_chain_id" pk="chain_id" />
+			</fk>
+		</table>
+		<table name="token" prior="tbl" generator_rows="150" >
+			<column name="token_contract" prior="pk_token_contract" type="varchar" length="42" jt="12" mandatory="y" />
+			<column name="fk_chain_id" type="varchar" jt="12" mandatory="y" />
+			<column name="token_id" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="total_suppy" type="bigint" jt="-5" />
+			<column name="market_cap" type="double precision" jt="3" />
+			<column name="discovery_timestamp" type="timestamp" length="12" jt="93" >
+				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
+			</column>
+			<column name="launched_timestamp" type="timestamp" length="12" jt="93" />
+			<column name="price_history" type="json" jt="2000" mandatory="y" />
+			<column name="token_name" prior="name" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="pk_token" unique="PRIMARY_KEY" >
+				<column name="token_contract" />
+			</index>
+			<fk name="fk_chain_id" to_schema="test" to_table="chain" >
+				<fk_column name="fk_chain_id" pk="chain_id" />
+			</fk>
+		</table>
+		<table name="tracked_tokens" prior="tbl" >
+			<column name="token_contract" prior="pk_token_contract" type="varchar" length="42" jt="12" mandatory="y" />
+			<column name="tracked_since" type="timestamp" jt="93" mandatory="y" >
+				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
+			</column>
+			<column name="last_updated" type="timestamp" jt="93" mandatory="y" >
+				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
+			</column>
+			<index name="pk_tracked_tokens" unique="PRIMARY_KEY" >
+				<column name="token_contract" />
+			</index>
+			<fk name="fk_tracked_tokens_token" to_schema="test" to_table="token" >
+				<fk_column name="token_contract" pk="token_contract" />
+			</fk>
+		</table>
+		<table name="wallet" prior="tbl" generator_rows="100" >
+			<column name="net_worth" type="bigint" jt="-5" mandatory="y" >
+				<defo><![CDATA[0.0]]></defo>
+			</column>
+			<column name="wallet_address" type="varchar" length="34" jt="12" mandatory="y" />
+			<index name="pk_wallet" unique="PRIMARY_KEY" >
+				<column name="wallet_address" />
+			</index>
+		</table>
+		<table name="wallet_coin_assets" prior="wallet_token_assets_0" >
+			<column name="wallet_address" type="varchar" length="44" jt="12" />
+			<column name="coin_id" prior="token_contract" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="quantity" type="double precision" jt="3" mandatory="y" >
+				<defo><![CDATA[0.0]]></defo>
+			</column>
+			<fk name="fk_wallet_address_0" to_schema="test" to_table="wallet" >
+				<fk_column name="wallet_address" pk="wallet_address" />
+			</fk>
+			<fk name="fk_coin_id" to_schema="test" to_table="coin" >
+				<fk_column name="coin_id" pk="coin_id" />
+			</fk>
+		</table>
+		<table name="wallet_token_assets" prior="wallet_assets" >
+			<column name="wallet_address" type="varchar" length="44" jt="12" />
+			<column name="token_contract" prior="token_id" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="quantity" type="double precision" jt="3" mandatory="y" >
+				<defo><![CDATA[0.0]]></defo>
+			</column>
+			<fk name="fk_token_contract" to_schema="test" to_table="token" >
+				<fk_column name="token_contract" pk="token_contract" />
+			</fk>
+			<fk name="fk_wallet_address" to_schema="test" to_table="wallet" >
+				<fk_column name="wallet_address" pk="wallet_address" />
+			</fk>
+		</table>
+	</schema>
+	<connector name="MyDb" database="MySql" host="localhost" port="3306" user="root" />
+	<layout name="Default Layout" id="Layout-672" show_relation="columns" >
+		<entity schema="test" name="chain" color="C1D8EE" x="480" y="496" />
+		<entity schema="test" name="coin" color="EEC1C1" x="704" y="448" />
+		<entity schema="test" name="token" color="EEC1C1" x="256" y="432" />
+		<entity schema="test" name="tracked_tokens" color="C1D8EE" x="48" y="464" />
+		<entity schema="test" name="wallet" color="EBEEC1" x="496" y="80" />
+		<entity schema="test" name="wallet_coin_assets" color="3986C1" x="592" y="240" />
+		<entity schema="test" name="wallet_token_assets" color="C1D8EE" x="416" y="240" />
+		<group name="Wallet Assets" color="C4E0F9" >
+			<entity schema="test" name="wallet_coin_assets" />
+			<entity schema="test" name="wallet_token_assets" />
+		</group>
+		<form name="Report" id="Report-1131" template="Page" css="container-fluid" view="frame" >
+			<body name="Body" template="Grid" pos="0,0,0,0,f,f" layout="{{-2},{-2}}" scroll="n" html="n" />
+		</form>
+	</layout>
+</project>
