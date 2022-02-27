@@ -239,7 +239,7 @@
 	</schema>
 	<connector name="MyDb" database="MySql" host="localhost" port="3306" user="root" />
 	<layout name="Parsed Script Layout" id="Layout-672" show_relation="columns" >
-		<comment><![CDATA[Proof of concept DB]]></comment>
+		<comment><![CDATA[test]]></comment>
 		<entity schema="main" name="active_positions" color="3986C1" x="48" y="496" />
 		<entity schema="main" name="chain" color="FFFF00" x="848" y="496" />
 		<entity schema="main" name="coin" color="FFFF00" x="1088" y="464" />

@@ -238,6 +238,8 @@
 		</table>
 	</schema>
 	<connector name="MyDb" database="MySql" host="localhost" port="3306" user="root" />
+	<connector name="Sqlite" database="Sqlite" driver_class="org.sqlite.JDBC" driver_jar="sqlite-jdbc-3.36.0.3.jar" driver_desc="Standard" host="localhost" port="7210" instance="E:/GitRepos/scraping/DB/crypto.db" />
+	<connector name="test_sqlite" database="Sqlite" host="localhost" port="7210" instance="E:/GitRepos/scraping/DB/sqlite3.db" />
 	<layout name="Parsed Script Layout" id="Layout-672" show_relation="columns" >
 		<comment><![CDATA[test]]></comment>
 		<entity schema="main" name="active_positions" color="3986C1" x="48" y="496" />
