@@ -34,12 +34,17 @@ class Coin(Base):
    
 Base.metadata.create_all(engine)
     
-doge = Coin('dog', null(), 'doge', 1.1)
-session.add(doge)
-session.commit()
+#doge = Coin('dog', null(), 'doge', 1.1)
+#session.add(doge)
+#session.commit()
 
-ob = session.query(Coin).get('doge')
+consulta = session.query(Coin)
+for i in consulta:
+    print(i.coin_price)
 
+ob = session.query(Coin).get('dog')
+
+print(ob)
 
 '''
 class doit(Base):
