@@ -255,15 +255,15 @@ FROM
 				<cell type="label" name="Each cell may contain a component: label, chart, button, tableview. &#10;&lt;br&gt;Double-click cells to edit. Insert rows, columns or merge cells from the context menu." pos="0,1,3,1,l,c" />
 				<cell type="chart" name="Pie" template="Pie" pos="0,2,4,2,l,c" max_records="20" >
 					<form_script type="DataSource" language="SQL" >
-						<var name="token_contract" />
-						<var name="chain_id" />
-						<var name="token_id" />
-						<var name="scraped_token" />
+						<var name="token_contract" type="-1" />
+						<var name="chain_id" type="-1" />
+						<var name="token_id" type="-1" />
+						<var name="scraped_token" type="-1" />
 						<var name="total_supply" type="3" />
 						<var name="market_cap" type="3" />
 						<var name="launched_timestamp" type="93" />
 						<var name="price_history" type="2000" />
-						<var name="token_name" />
+						<var name="token_name" type="-1" />
 						<var name="listed_timestamp" type="93" />
 						<script ><![CDATA[SELECT * FROM "public".tokens]]></script>
 					</form_script>
@@ -275,15 +275,15 @@ FROM
 				</cell>
 				<tableview name="sample" template="Table" css="table table-striped table-sm table-hover" pos="0,3,4,3,f,f" layout="{{-2,-2,-2,-2,-2,-2,-2},{-2,-2}}" scroll="n" html="n" header_rows="1" >
 					<form_script type="DataSource" language="SQL" >
-						<var name="token_contract" />
-						<var name="chain_id" />
-						<var name="token_id" />
-						<var name="scraped_token" />
+						<var name="token_contract" type="-1" />
+						<var name="chain_id" type="-1" />
+						<var name="token_id" type="-1" />
+						<var name="scraped_token" type="-1" />
 						<var name="total_supply" type="3" />
 						<var name="market_cap" type="3" />
 						<var name="launched_timestamp" type="93" />
 						<var name="price_history" type="2000" />
-						<var name="token_name" />
+						<var name="token_name" type="-1" />
 						<var name="listed_timestamp" type="93" />
 						<script ><![CDATA[SELECT * FROM "public".tokens]]></script>
 					</form_script>
