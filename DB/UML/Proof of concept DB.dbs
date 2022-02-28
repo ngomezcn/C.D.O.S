@@ -4,7 +4,7 @@
 		<udt name="transaction_type" udt_java_type="12" udt_precision="NONE" >
 			<udt_script><![CDATA[CREATE TYPE ${name} AS ENUM ('buy',  'sell')]]></udt_script>
 		</udt>
-		<table name="active_positions" prior="active_token_assets" >
+		<table name="active_positions" prior="active_token_assets" generator_rows="100" >
 			<column name="order_id" type="integer" jt="4" mandatory="y" />
 			<column name="actived_timestamp" type="timestamp" length="12" jt="93" >
 				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
@@ -40,7 +40,7 @@
 				<fk_column name="fk_chain_id" pk="chain_id" />
 			</fk>
 		</table>
-		<table name="crypto_tracking_platforms" prior="crypto_tracking_platform" >
+		<table name="crypto_tracking_platforms" prior="crypto_tracking_platform" generator_rows="100" >
 			<column name="ctp_name_id" prior="tracking_platform_id" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="domain" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="ip" type="varchar" length="9" jt="12" mandatory="y" />
@@ -49,7 +49,7 @@
 				<column name="ctp_name_id" />
 			</index>
 		</table>
-		<table name="position_status " prior="positions_status" >
+		<table name="position_status " prior="positions_status" generator_rows="150" >
 			<column name="order_id" type="integer" jt="4" mandatory="y" />
 			<column name="current_profit" type="double precision" jt="3" mandatory="y" >
 				<defo><![CDATA[0.0]]></defo>
@@ -64,7 +64,7 @@
 				<fk_column name="order_id" pk="order_id" />
 			</fk>
 		</table>
-		<table name="positions_delivery" prior="position_delivery" >
+		<table name="positions_delivery" prior="position_delivery" generator_rows="150" >
 			<column name="order_id" type="integer" jt="4" mandatory="y" />
 			<column name="wallet_address" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="token_contract" type="varchar" jt="12" mandatory="y" />
@@ -85,7 +85,7 @@
 				<fk_column name="wallet_address" pk="wallet_address" />
 			</fk>
 		</table>
-		<table name="positions_order" prior="position_order" >
+		<table name="positions_order" prior="position_order" generator_rows="225" >
 			<column name="order_id" type="integer" jt="4" mandatory="y" />
 			<column name="wallet_address" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="order_timestamp" type="timestamp" length="12" jt="93" >
@@ -101,7 +101,7 @@
 				<fk_column name="order_id" pk="order_id" />
 			</fk>
 		</table>
-		<table name="price_tracking_platforms" prior="price_tracking_platform" >
+		<table name="price_tracking_platforms" prior="price_tracking_platform" generator_rows="100" >
 			<column name="ptp_name_id" prior="price_tracking_platform_id" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="domain" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="ip" type="varchar" length="9" jt="12" mandatory="y" />
@@ -110,7 +110,7 @@
 				<column name="ptp_name_id" />
 			</index>
 		</table>
-		<table name="raw_scraped_tokens" prior="scraped_tokens" >
+		<table name="raw_scraped_tokens" prior="scraped_tokens" generator_rows="150" >
 			<column name="token_id" prior="discovered_token_id" type="varchar" jt="12" mandatory="y" />
 			<column name="ctp_name_id" prior="tracking_platform_id" type="varchar" jt="12" mandatory="y" />
 			<column name="token_name" type="varchar" length="100" jt="12" mandatory="y" />
@@ -129,7 +129,7 @@
 				<fk_column name="ctp_name_id" pk="ctp_name_id" />
 			</fk>
 		</table>
-		<table name="scrapy_tokens" prior="scrapy_token" >
+		<table name="scrapy_tokens" prior="scrapy_token" generator_rows="150" >
 			<column name="listed_timestamp" type="timestamp" length="12" jt="93" mandatory="y" />
 			<column name="discovered_timestamp" type="timestamp" length="12" jt="93" mandatory="y" />
 			<column name="ptp_name_id" prior="tracking_platform_id" type="varchar" jt="12" mandatory="y" />
@@ -158,7 +158,7 @@
 				<fk_column name="fk_chain_id" pk="chain_id" />
 			</fk>
 		</table>
-		<table name="tracked_tokens" prior="tbl" >
+		<table name="tracked_tokens" prior="tbl" generator_rows="225" >
 			<column name="token_contract" prior="pk_token_contract" type="varchar" length="42" jt="12" mandatory="y" />
 			<column name="ptp_name_id" prior="price_tracking_platform_id" type="varchar" jt="12" mandatory="y" />
 			<column name="tracked_since" type="timestamp" jt="93" mandatory="y" >
@@ -177,7 +177,7 @@
 				<fk_column name="ptp_name_id" pk="ptp_name_id" />
 			</fk>
 		</table>
-		<table name="transactions" prior="transaction" >
+		<table name="transactions" prior="transaction" generator_rows="225" >
 			<column name="order_id" type="integer" jt="4" mandatory="y" />
 			<column name="wallet_address" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="fees_cost" type="double precision" jt="3" mandatory="y" />
@@ -197,7 +197,7 @@
 				<fk_column name="wallet_address" pk="wallet_address" />
 			</fk>
 		</table>
-		<table name="wallet_coins" prior="wallet_coin_assets" >
+		<table name="wallet_coins" prior="wallet_coin_assets" generator_rows="225" >
 			<column name="wallet_address" type="varchar" length="44" jt="12" mandatory="y" />
 			<column name="coin_id" prior="token_contract" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="quantity" type="double precision" jt="3" mandatory="y" >
@@ -210,7 +210,7 @@
 				<fk_column name="coin_id" pk="coin_id" />
 			</fk>
 		</table>
-		<table name="wallet_tokens" prior="wallet_token_assets" >
+		<table name="wallet_tokens" prior="wallet_token_assets" generator_rows="225" >
 			<column name="wallet_address" type="varchar" length="44" jt="12" mandatory="y" />
 			<column name="token_contract" prior="token_id" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="quantity" type="double precision" jt="3" mandatory="y" >

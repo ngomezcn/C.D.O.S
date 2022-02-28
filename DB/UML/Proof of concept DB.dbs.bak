@@ -12,35 +12,35 @@
 			<index name="pk_active_orders" unique="PRIMARY_KEY" >
 				<column name="order_id" />
 			</index>
-			<fk name="fk_active_orders_token_order" to_schema="public" to_table="position_delivery" >
+			<fk name="fk_active_orders_token_order" to_schema="public" to_table="positions_delivery" >
 				<fk_column name="order_id" pk="order_id" />
 			</fk>
 		</table>
 		<table name="assets delivery" prior="tbl_3" />
-		<table name="chain" prior="tbl" generator_rows="100" >
+		<table name="chains" prior="chain" generator_rows="100" >
 			<column name="chain_id" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="chain_name" type="varchar" length="100" jt="12" mandatory="y" />
-			<column name="fk_coin_id" type="varchar" jt="12" />
+			<column name="fk_coin_id" type="varchar" jt="12" mandatory="y" />
 			<index name="pk_tbl" unique="PRIMARY_KEY" >
 				<column name="chain_id" />
 			</index>
-			<fk name="fk_coin_id" to_schema="public" to_table="coin" >
+			<fk name="fk_coin_id" to_schema="public" to_table="coins" >
 				<fk_column name="fk_coin_id" pk="coin_id" />
 			</fk>
 		</table>
-		<table name="coin" prior="coins" generator_rows="150" >
+		<table name="coins" prior="coin" generator_rows="150" >
 			<column name="coin_id" type="varchar" length="100" jt="12" mandatory="y" />
-			<column name="fk_chain_id" type="varchar" jt="12" mandatory="y" />
+			<column name="fk_chain_id" type="varchar" jt="12" />
 			<column name="coin_name" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="coin_price" type="double precision" jt="3" mandatory="y" />
 			<index name="pk_coin" unique="PRIMARY_KEY" >
 				<column name="coin_id" />
 			</index>
-			<fk name="fk_chain_id" to_schema="public" to_table="chain" >
+			<fk name="fk_chain_id" to_schema="public" to_table="chains" >
 				<fk_column name="fk_chain_id" pk="chain_id" />
 			</fk>
 		</table>
-		<table name="crypto_tracking_platform" prior="tracking_platform" >
+		<table name="crypto_tracking_platforms" prior="crypto_tracking_platform" >
 			<column name="ctp_name_id" prior="tracking_platform_id" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="domain" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="ip" type="varchar" length="9" jt="12" mandatory="y" />
@@ -48,43 +48,6 @@
 			<index name="pk_crypto_tracking_platform" unique="PRIMARY_KEY" >
 				<column name="ctp_name_id" />
 			</index>
-		</table>
-		<table name="position_delivery" prior="token_assets_delivery" >
-			<column name="order_id" type="integer" jt="4" mandatory="y" />
-			<column name="wallet_address" type="varchar" length="100" jt="12" mandatory="y" />
-			<column name="token_contract" type="varchar" jt="12" mandatory="y" />
-			<column name="quantity_tokens" type="double precision" jt="3" mandatory="y" />
-			<column name="timestamp" type="timestamp" length="12" jt="93" >
-				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
-			</column>
-			<index name="unq_token_order_order_id" unique="UNIQUE_KEY" >
-				<column name="order_id" />
-			</index>
-			<index name="pk_token_order" unique="PRIMARY_KEY" >
-				<column name="order_id" />
-			</index>
-			<fk name="fk_token_contract" to_schema="public" to_table="tracked_tokens" >
-				<fk_column name="token_contract" pk="token_contract" />
-			</fk>
-			<fk name="fk_wallet_address" to_schema="public" to_table="wallet" >
-				<fk_column name="wallet_address" pk="wallet_address" />
-			</fk>
-		</table>
-		<table name="position_order" prior="asset_order" >
-			<column name="order_id" type="integer" jt="4" mandatory="y" />
-			<column name="wallet_address" type="varchar" length="100" jt="12" mandatory="y" />
-			<column name="order_timestamp" type="timestamp" length="12" jt="93" >
-				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
-			</column>
-			<index name="pk_asset_order" unique="PRIMARY_KEY" >
-				<column name="order_id" />
-			</index>
-			<fk name="fk_wallet_address" to_schema="public" to_table="wallet" >
-				<fk_column name="wallet_address" pk="wallet_address" />
-			</fk>
-			<fk name="fk_order_id" to_schema="public" to_table="position_delivery" >
-				<fk_column name="order_id" pk="order_id" />
-			</fk>
 		</table>
 		<table name="position_status " prior="positions_status" >
 			<column name="order_id" type="integer" jt="4" mandatory="y" />
@@ -101,7 +64,44 @@
 				<fk_column name="order_id" pk="order_id" />
 			</fk>
 		</table>
-		<table name="price_tracking_platform" prior="crypto_tracking_platform_0" >
+		<table name="positions_delivery" prior="position_delivery" >
+			<column name="order_id" type="integer" jt="4" mandatory="y" />
+			<column name="wallet_address" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="token_contract" type="varchar" jt="12" mandatory="y" />
+			<column name="quantity_tokens" type="double precision" jt="3" mandatory="y" />
+			<column name="timestamp" type="timestamp" length="12" jt="93" >
+				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
+			</column>
+			<index name="unq_token_order_order_id" unique="UNIQUE_KEY" >
+				<column name="order_id" />
+			</index>
+			<index name="pk_token_order" unique="PRIMARY_KEY" >
+				<column name="order_id" />
+			</index>
+			<fk name="fk_token_contract" to_schema="public" to_table="tracked_tokens" >
+				<fk_column name="token_contract" pk="token_contract" />
+			</fk>
+			<fk name="fk_wallet_address" to_schema="public" to_table="wallets" >
+				<fk_column name="wallet_address" pk="wallet_address" />
+			</fk>
+		</table>
+		<table name="positions_order" prior="position_order" >
+			<column name="order_id" type="integer" jt="4" mandatory="y" />
+			<column name="wallet_address" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="order_timestamp" type="timestamp" length="12" jt="93" >
+				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
+			</column>
+			<index name="pk_asset_order" unique="PRIMARY_KEY" >
+				<column name="order_id" />
+			</index>
+			<fk name="fk_wallet_address" to_schema="public" to_table="wallets" >
+				<fk_column name="wallet_address" pk="wallet_address" />
+			</fk>
+			<fk name="fk_order_id" to_schema="public" to_table="positions_delivery" >
+				<fk_column name="order_id" pk="order_id" />
+			</fk>
+		</table>
+		<table name="price_tracking_platforms" prior="price_tracking_platform" >
 			<column name="ptp_name_id" prior="price_tracking_platform_id" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="domain" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="ip" type="varchar" length="9" jt="12" mandatory="y" />
@@ -125,23 +125,23 @@
 			<index name="pk_new_tokens_discovered" unique="PRIMARY_KEY" >
 				<column name="token_id" />
 			</index>
-			<fk name="fk_raw_scraped_tokens" to_schema="public" to_table="crypto_tracking_platform" >
+			<fk name="fk_raw_scraped_tokens" to_schema="public" to_table="crypto_tracking_platforms" >
 				<fk_column name="ctp_name_id" pk="ctp_name_id" />
 			</fk>
 		</table>
-		<table name="scrapy_token" prior="candidate_token" >
+		<table name="scrapy_tokens" prior="scrapy_token" >
 			<column name="listed_timestamp" type="timestamp" length="12" jt="93" mandatory="y" />
 			<column name="discovered_timestamp" type="timestamp" length="12" jt="93" mandatory="y" />
 			<column name="ptp_name_id" prior="tracking_platform_id" type="varchar" jt="12" mandatory="y" />
 			<column name="ctp_name_id" type="varchar" jt="12" mandatory="y" />
-			<fk name="fk_ptp_name_id" to_schema="public" to_table="price_tracking_platform" >
+			<fk name="fk_ptp_name_id" to_schema="public" to_table="price_tracking_platforms" >
 				<fk_column name="ptp_name_id" pk="ptp_name_id" />
 			</fk>
-			<fk name="fk_ctp_name_id" to_schema="public" to_table="crypto_tracking_platform" >
+			<fk name="fk_ctp_name_id" to_schema="public" to_table="crypto_tracking_platforms" >
 				<fk_column name="ctp_name_id" pk="ctp_name_id" />
 			</fk>
 		</table>
-		<table name="token" prior="tbl" generator_rows="150" >
+		<table name="tokens" prior="token" generator_rows="150" >
 			<column name="token_contract" prior="pk_token_contract" type="varchar" length="42" jt="12" mandatory="y" />
 			<column name="fk_chain_id" type="varchar" jt="12" mandatory="y" />
 			<column name="token_id" type="varchar" length="100" jt="12" mandatory="y" />
@@ -154,7 +154,7 @@
 			<index name="pk_token" unique="PRIMARY_KEY" >
 				<column name="token_contract" />
 			</index>
-			<fk name="fk_chain_id" to_schema="public" to_table="chain" >
+			<fk name="fk_chain_id" to_schema="public" to_table="chains" >
 				<fk_column name="fk_chain_id" pk="chain_id" />
 			</fk>
 		</table>
@@ -170,14 +170,14 @@
 			<index name="pk_tracked_tokens" unique="PRIMARY_KEY" >
 				<column name="token_contract" />
 			</index>
-			<fk name="fk_token_contract" to_schema="public" to_table="token" >
+			<fk name="fk_token_contract" to_schema="public" to_table="tokens" >
 				<fk_column name="token_contract" pk="token_contract" />
 			</fk>
-			<fk name="fk_price_tracking_platform_id" to_schema="public" to_table="price_tracking_platform" >
+			<fk name="fk_price_tracking_platform_id" to_schema="public" to_table="price_tracking_platforms" >
 				<fk_column name="ptp_name_id" pk="ptp_name_id" />
 			</fk>
 		</table>
-		<table name="transaction" prior="tbl_4" >
+		<table name="transactions" prior="transaction" >
 			<column name="order_id" type="integer" jt="4" mandatory="y" />
 			<column name="wallet_address" type="varchar" length="100" jt="12" mandatory="y" />
 			<column name="fees_cost" type="double precision" jt="3" mandatory="y" />
@@ -190,21 +190,12 @@
 			<index name="pk_tbl_4" unique="PRIMARY_KEY" >
 				<column name="order_id" />
 			</index>
-			<fk name="fk_order_id" to_schema="public" to_table="position_delivery" >
+			<fk name="fk_order_id" to_schema="public" to_table="positions_delivery" >
 				<fk_column name="order_id" pk="order_id" />
 			</fk>
-			<fk name="fk_wallet_address" to_schema="public" to_table="wallet" >
+			<fk name="fk_wallet_address" to_schema="public" to_table="wallets" >
 				<fk_column name="wallet_address" pk="wallet_address" />
 			</fk>
-		</table>
-		<table name="wallet" prior="tbl" generator_rows="100" >
-			<column name="wallet_address" type="varchar" length="44" jt="12" mandatory="y" />
-			<column name="net_worth" type="double precision" jt="3" mandatory="y" >
-				<defo><![CDATA[0.0]]></defo>
-			</column>
-			<index name="pk_wallet" unique="PRIMARY_KEY" >
-				<column name="wallet_address" />
-			</index>
 		</table>
 		<table name="wallet_coins" prior="wallet_coin_assets" >
 			<column name="wallet_address" type="varchar" length="44" jt="12" mandatory="y" />
@@ -212,10 +203,10 @@
 			<column name="quantity" type="double precision" jt="3" mandatory="y" >
 				<defo><![CDATA[0.0]]></defo>
 			</column>
-			<fk name="fk_wallet_address_0" to_schema="public" to_table="wallet" >
+			<fk name="fk_wallet_address_0" to_schema="public" to_table="wallets" >
 				<fk_column name="wallet_address" pk="wallet_address" />
 			</fk>
-			<fk name="fk_coin_id" to_schema="public" to_table="coin" >
+			<fk name="fk_coin_id" to_schema="public" to_table="coins" >
 				<fk_column name="coin_id" pk="coin_id" />
 			</fk>
 		</table>
@@ -225,57 +216,67 @@
 			<column name="quantity" type="double precision" jt="3" mandatory="y" >
 				<defo><![CDATA[0.0]]></defo>
 			</column>
-			<fk name="fk_token_contract" to_schema="public" to_table="token" >
+			<fk name="fk_token_contract" to_schema="public" to_table="tokens" >
 				<fk_column name="token_contract" pk="token_contract" />
 			</fk>
-			<fk name="fk_wallet_address" to_schema="public" to_table="wallet" >
+			<fk name="fk_wallet_address" to_schema="public" to_table="wallets" >
 				<fk_column name="wallet_address" pk="wallet_address" />
 			</fk>
 		</table>
+		<table name="wallets" prior="wallet" generator_rows="100" >
+			<column name="wallet_address" type="varchar" length="44" jt="12" mandatory="y" />
+			<column name="net_worth" type="double precision" jt="3" mandatory="y" >
+				<defo><![CDATA[0.0]]></defo>
+			</column>
+			<index name="pk_wallet" unique="PRIMARY_KEY" >
+				<column name="wallet_address" />
+			</index>
+		</table>
 	</schema>
+	<connector name="PostgreSQL" database="PostgreSQL" host="localhost" port="5432" instance="postgres" user="postgres" passwd="MTIzNA==" />
 	<connector name="PostgreSQL" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-42.3.2.jar" driver_desc="Standard" host="localhost" port="5432" instance="postgres" user="postgres" passwd="MTIzNA==" />
 	<layout name="Parsed Script Layout" id="Layout-672" show_relation="columns" >
 		<comment><![CDATA[test]]></comment>
 		<entity schema="public" name="active_positions" color="3986C1" x="48" y="496" />
-		<entity schema="public" name="chain" color="FFFF00" x="848" y="496" />
-		<entity schema="public" name="coin" color="FFFF00" x="1088" y="464" />
-		<entity schema="public" name="crypto_tracking_platform" color="C1D8EE" x="896" y="720" />
-		<entity schema="public" name="position_delivery" color="C1D8EE" x="240" y="480" />
-		<entity schema="public" name="position_order" color="C1D8EE" x="240" y="288" />
+		<entity schema="public" name="chains" color="FFFF00" x="848" y="496" />
+		<entity schema="public" name="coins" color="FFFF00" x="1088" y="464" />
+		<entity schema="public" name="crypto_tracking_platforms" color="C1D8EE" x="896" y="720" />
 		<entity schema="public" name="position_status " color="3986C1" x="48" y="288" />
-		<entity schema="public" name="price_tracking_platform" color="3986C1" x="336" y="816" />
+		<entity schema="public" name="positions_delivery" color="C1D8EE" x="240" y="480" />
+		<entity schema="public" name="positions_order" color="C1D8EE" x="240" y="288" />
+		<entity schema="public" name="price_tracking_platforms" color="3986C1" x="336" y="816" />
 		<entity schema="public" name="raw_scraped_tokens" color="C1D8EE" x="640" y="848" />
-		<entity schema="public" name="scrapy_token" color="C1D8EE" x="640" y="720" />
-		<entity schema="public" name="token" color="FFFF00" x="640" y="448" />
+		<entity schema="public" name="scrapy_tokens" color="C1D8EE" x="640" y="720" />
+		<entity schema="public" name="tokens" color="FFFF00" x="640" y="448" />
 		<entity schema="public" name="tracked_tokens" color="C1D8EE" x="352" y="688" />
-		<entity schema="public" name="transaction" color="C1D8EE" x="432" y="464" />
-		<entity schema="public" name="wallet" color="EBEEC1" x="576" y="80" />
+		<entity schema="public" name="transactions" color="C1D8EE" x="432" y="464" />
 		<entity schema="public" name="wallet_coins" color="3986C1" x="848" y="288" />
 		<entity schema="public" name="wallet_tokens" color="C1D8EE" x="640" y="288" />
+		<entity schema="public" name="wallets" color="EBEEC1" x="576" y="80" />
 		<group name="Wallet assets" color="C4E0F9" >
 			<entity schema="public" name="wallet_coins" />
 			<entity schema="public" name="wallet_tokens" />
 		</group>
 		<group name="Crypto Ecosystem" color="FFFF00" >
-			<entity schema="public" name="token" />
-			<entity schema="public" name="chain" />
-			<entity schema="public" name="coin" />
+			<entity schema="public" name="coins" />
+			<entity schema="public" name="chains" />
+			<entity schema="public" name="tokens" />
 		</group>
 		<group name="Trade system" color="00FFFF" >
-			<entity schema="public" name="position_delivery" />
 			<entity schema="public" name="position_status " />
-			<entity schema="public" name="position_order" />
+			<entity schema="public" name="transactions" />
+			<entity schema="public" name="positions_delivery" />
 			<entity schema="public" name="active_positions" />
-			<entity schema="public" name="transaction" />
+			<entity schema="public" name="positions_order" />
 		</group>
 		<group name="Tracking system" color="00FF00" >
-			<entity schema="public" name="price_tracking_platform" />
 			<entity schema="public" name="tracked_tokens" />
+			<entity schema="public" name="price_tracking_platforms" />
 		</group>
 		<group name="Discovery system" color="FF00FF" >
-			<entity schema="public" name="scrapy_token" />
+			<entity schema="public" name="scrapy_tokens" />
+			<entity schema="public" name="crypto_tracking_platforms" />
 			<entity schema="public" name="raw_scraped_tokens" />
-			<entity schema="public" name="crypto_tracking_platform" />
 		</group>
 		<script name="SQL_Editor" id="Editor-12d1" language="SQL" >
 			<string><![CDATA[select * from position_order;]]></string>
