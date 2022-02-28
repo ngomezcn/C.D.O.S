@@ -2,6 +2,9 @@
 <project name="PostgreSQL" id="Project-16d2" database="PostgreSQL" >
 	<schema name="public" >
 		<comment><![CDATA[standard public schema]]></comment>
+		<udt name="transaction_type" udt_java_type="12" udt_precision="NONE" >
+			<udt_script><![CDATA[CREATE TYPE ${name} AS ENUM ( 'sell', 'buy'  )]]></udt_script>
+		</udt>
 		<table name="chains" >
 			<column name="chain_id" type="varchar" decimal="0" jt="12" mandatory="y" />
 			<column name="coin_id" type="varchar" decimal="0" jt="12" mandatory="y" />
@@ -165,7 +168,6 @@
 	</schema>
 	<connector name="PostgreSQL" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-42.3.2.jar" driver_desc="Standard" host="localhost" port="5432" instance="postgres" user="postgres" passwd="MTIzNA==" />
 	<layout name="Main Layout" id="Layout-bee" show_relation="columns" >
-		<comment><![CDATA[PostgreSQL]]></comment>
 		<entity schema="public" name="chains" color="BED3F4" x="704" y="416" />
 		<entity schema="public" name="coins" color="BED3F4" x="864" y="432" />
 		<entity schema="public" name="crypto_tracking_platforms" color="BED3F4" x="736" y="704" />
