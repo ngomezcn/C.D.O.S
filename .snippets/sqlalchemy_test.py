@@ -38,6 +38,9 @@ doge = Coin('dog', null(), 'doge', 1.1)
 session.add(doge)
 session.commit()
 
+ob = session.query(Coin).get('doge')
+
+
 '''
 class doit(Base):
     __tablename__ = 'doit'
