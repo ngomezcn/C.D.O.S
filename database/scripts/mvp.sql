@@ -23,7 +23,7 @@ CREATE  TABLE chains (
 CREATE  TABLE price_tracking_platforms (
 	ptp_id          varchar  NOT NULL,
 	domain             varchar  NOT NULL,
-	ip                   varchar(12)  NOT NULL,
+	ip                   varchar(14)  NOT NULL,
 	root_https           varchar  NOT NULL,
 	CONSTRAINT pk_ptp_id PRIMARY KEY (ptp_id)
 );
@@ -31,7 +31,7 @@ CREATE  TABLE price_tracking_platforms (
 CREATE  TABLE crypto_tracking_platforms(
 	ctp_id               varchar  NOT NULL,
 	domain               varchar  NOT NULL,
-	ip                   varchar(11)  NOT NULL,
+	ip                   varchar(14)  NOT NULL,
 	root_https           varchar  NOT NULL,
 	CONSTRAINT pk_ctp_id PRIMARY KEY (ctp_id)
 );
@@ -104,3 +104,6 @@ CREATE  TABLE price_tracked_tokens (
 	CONSTRAINT fk_tracked_tokens FOREIGN KEY (token_contract) REFERENCES tokens(token_contract),
 	CONSTRAINT fk_ptp_id FOREIGN KEY (ptp_id) REFERENCES price_tracking_platforms(ptp_id)
 );
+
+
+select * from crypto_tracking_platforms
