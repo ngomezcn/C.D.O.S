@@ -2,12 +2,8 @@ from sqlalchemy import table
 from models.discovery_system import *
 from core.db_manager import db
 from datetime import datetime
-from utils.table import *
+from utils.models import *
 
-
-table.exists(CryptoTrackingPlatform)
-table.exists(ScrapedToken)
-table.exists(RawTokenToReview)
 
 
 #new_ctp = CryptoTrackingPlatform('coingecko', 'coingecko.com', '104.148.544.127', 'httpsdf://www.coingecko.com/')
