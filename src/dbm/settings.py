@@ -1,5 +1,3 @@
-
-
 SERVER = 'localhost'
 DATABASE = 'postgres'
 USERNAME = 'postgres'

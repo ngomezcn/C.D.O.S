@@ -3,7 +3,7 @@ from sqlalchemy import TIME, Column, UniqueConstraint , create_engine, null
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.dialects.postgresql import DOUBLE_PRECISION, VARCHAR, TIMESTAMP, MONEY
-from core.db_manager import db, Base
+from ..core.db_manager import db, Base
 
 class CryptoTrackingPlatform(Base):
     __tablename__  = 'crypto_tracking_platforms'
@@ -18,7 +18,7 @@ class CryptoTrackingPlatform(Base):
         self.domain = domain
         self.ip = ip
         self.root_https = root_https
-
+        
 class ScrapedToken(Base):
     __tablename__  = 'scraped_tokens'
     
@@ -36,7 +36,6 @@ class ScrapedToken(Base):
         self.discovery_timestamp = discovery_timestamp
         self.listed_timestamp = listed_timestamp
         self.pk = uri
-
 
 class RawTokenToReview(Base):      
     __tablename__  = 'raw_token_to_review'
