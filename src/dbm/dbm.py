@@ -1,19 +1,25 @@
 from sqlalchemy import table
 from models.discovery_system import *
 from core.db_manager import db
+from datetime import datetime
+from utils.table import *
 
-cpt = CryptoTrackingPlatform('acoidfngsdfecko', 'www.coinsdfgecko.com', '193.168.134.34', 'httpsdf://www.coingecko.com/')
-#a = db.session.query(CryptoTrackingPlatform).
-#a = db.engine.execute('select * from crypto_tracking_platforms;')
-#query = db.session.query(table=CryptoTrackingPlatform).get()
 
-for instance in db.session.query(CryptoTrackingPlatform.name.label('name_label')).all():    
-    print(instance.domain, instance.ip)
+table.exists(CryptoTrackingPlatform)
+table.exists(ScrapedToken)
+table.exists(RawTokenToReview)
 
-#for i in a:
-#    for b in i:
-#        print(b)
 
-#print(a)
+#new_ctp = CryptoTrackingPlatform('coingecko', 'coingecko.com', '104.148.544.127', 'httpsdf://www.coingecko.com/')
+#db.cinsert(new_ctp)
+#ctp = db.session.query(CryptoTrackingPlatform).get("coingecko")
+#print(ctp.domain)
 
-#print(db.get(CryptoTrackingPlatform, "coingecko").domain)
+#db.session.query(ScrapedToken).count()
+#ScrapedToken('tesfgdddfssdffgfdsdfft1/dffgdffssdfdgadfsdftest1','ddgfdsfdfdfsdffgd', cpt.ctp_id, datetime.now(), datetime.now())
+#test = RawTokenToReview(uri='es/tokens/doge', token_id='doge', ctp_id=ctp.ctp_id, token_name='dogecoin', discovery_timestamp=datetime.now(), contract='0x124sdfsdf', chain_name='hdl', value=0.000134, listed_timestamp=datetime.now())
+#db.cinsert(test)
+#test1 = ScrapedToken('tesfgdddfssdffgfdsdfft1/dffgdffssdfdgadfsdftest1','ddgfdsfdfdfsdffgd', cpt.ctp_id, datetime.now(), datetime.now())
+#db.cinsert(test1)
+#test2 = ScrapedToken('tesfgd234fgsdffasdfadffgf324t5/tgdfesdasdffsdffgtfff3123','dsfsfsdfdfffadfgsfgd', a.ctp_id, datetime.now(), datetime.now())
+#db.cinsert(test2)

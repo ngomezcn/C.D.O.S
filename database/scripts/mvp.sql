@@ -23,7 +23,7 @@ CREATE  TABLE chains (
 CREATE  TABLE price_tracking_platforms (
 	ptp_id          varchar  NOT NULL,
 	domain             varchar  NOT NULL,
-	ip                   varchar(14)  NOT NULL,
+	ip                   varchar(15)  NOT NULL,
 	root_https           varchar  NOT NULL,
 	CONSTRAINT pk_ptp_id PRIMARY KEY (ptp_id)
 );
@@ -31,7 +31,7 @@ CREATE  TABLE price_tracking_platforms (
 CREATE  TABLE crypto_tracking_platforms(
 	ctp_id               varchar  NOT NULL,
 	domain               varchar  NOT NULL,
-	ip                   varchar(14)  NOT NULL,
+	ip                   varchar(15)  NOT NULL,
 	root_https           varchar  NOT NULL,
 	CONSTRAINT pk_ctp_id PRIMARY KEY (ctp_id)
 );
@@ -39,11 +39,11 @@ CREATE  TABLE crypto_tracking_platforms(
 CREATE  TABLE scraped_tokens(
     uri                  varchar  NOT NULL UNIQUE,
     token_id             varchar  NOT NULL UNIQUE,
-	ctp_name_id          varchar  NOT NULL,
+	ctp_id          varchar  NOT NULL,
 	discovery_timestamp  timestamp  NOT NULL,
 	listed_timestamp     timestamp  NOT NULL,
     CONSTRAINT pk_uri_token_id PRIMARY KEY (uri),
-	CONSTRAINT fk_ctp_name_id FOREIGN KEY (ctp_name_id) REFERENCES crypto_tracking_platforms(ctp_id)
+	CONSTRAINT fk_ctp_name_id FOREIGN KEY (ctp_id) REFERENCES crypto_tracking_platforms(ctp_id)
 );
 
 CREATE  TABLE tokens (
@@ -51,13 +51,11 @@ CREATE  TABLE tokens (
 	chain_id             varchar  NOT NULL,
     token_id             varchar  NOT NULL UNIQUE,
     scraped_token        varchar  NOT NULL UNIQUE,
-
 	total_supply         double precision,
 	market_cap           double precision,
 	launched_timestamp   timestamp,
 	price_history        json  NOT NULL,
 	token_name           varchar  NOT NULL,
-	listed_timestamp     timestamp  NOT NULL,
 
 	CONSTRAINT pk_token_contract PRIMARY KEY (token_contract),
 	CONSTRAINT fk_chain_id FOREIGN KEY (chain_id) REFERENCES chains(chain_id),
@@ -82,16 +80,17 @@ CREATE  TABLE wallet_assets_tokens (
 	CONSTRAINT fk_token_contract FOREIGN KEY (token_contract) REFERENCES tokens(token_contract)
 );
 
-CREATE TABLE raw_scraped_tokens (
+CREATE TABLE raw_token_to_review (
+    uri                  varchar,
 	token_id             varchar  NOT NULL,
 	ctp_id               varchar  NOT NULL,
 	token_name           varchar  NOT NULL,
 	discovery_timestamp  timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	chain_name           varchar  NOT NULL,
+	contract             varchar  NOT NULL,
 	value                money    NOT NULL,
 	listed_timestamp     timestamp NOT NULL,
-	uri                  varchar,
-	CONSTRAINT pk_new_tokens_discovered PRIMARY KEY (token_id),
+	CONSTRAINT pk_new_tokens_discovered PRIMARY KEY (uri),
 	CONSTRAINT fk_ctp_id FOREIGN KEY (ctp_id) REFERENCES crypto_tracking_platforms(ctp_id)
 );
 
@@ -106,4 +105,8 @@ CREATE  TABLE price_tracked_tokens (
 );
 
 
-select * from crypto_tracking_platforms
+select * from crypto_tracking_platforms;
+
+select * from scraped_tokens;
+
+select * from crypto_tracking_platforms;

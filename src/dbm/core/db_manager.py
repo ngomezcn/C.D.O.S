@@ -1,8 +1,10 @@
+from tkinter import N
 from typing_extensions import Self
 from sqlalchemy import create_engine, insert
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, query, session
 from settings import DATABASE_CONNECTION
+from psycopg2.errors import UniqueViolation
 
 class Connect():
     connection = None
@@ -25,7 +27,7 @@ class Session(Connect):
         Session = sessionmaker(bind=self.engine)
         self.session = Session()
         self.base = declarative_base()
-        
+     
 class DBInterface(Session):
     
     def insert(self, obj):
@@ -38,7 +40,8 @@ class DBInterface(Session):
         try:
             self.session.commit()
         except Exception as e:
-            print(e)
+            print(str(e.__cause__).replace('\n', '    ').replace(' ', ' '))
+            self.session.rollback()
             
     def cinsert(self, obj):
         self.insert(obj)
