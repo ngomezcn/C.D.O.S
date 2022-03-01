@@ -6,9 +6,10 @@
 #ctp = db.session.query(CryptoTrackingPlatform).get("coingecko")
 #print(ctp.domain)
 
-from db.core.db_manager import db
-from db.models.discovery_system import *
+#from db.core.db_manager import db
+#from db.models.discovery_system import *
 
-db.cinsert(CryptoTrackingPlatform('casd','asd','asdsad','asdsad'))
+#db.cinsert(CryptoTrackingPlatform('casd','asd','asdsad','asdsad'))
 
-print(db.session.query(ScrapedToken).count())
+#print(db.session.query(ScrapedToken).count())
+
