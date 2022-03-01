@@ -1,10 +1,9 @@
 import sys
 import os
-sys.path.append( os.path.realpath(__file__)+ "\\..\\..\\")
 import unittest
-from utils.models import table_exists
-from models.discovery_system import *
-from utils.models import table_exists
+
+from db.models.discovery_system import CryptoTrackingPlatform, ScrapedToken, RawTokenToReview
+from db.utils.orm import table_exists
 
 class TestModels(unittest.TestCase):
 

@@ -110,3 +110,4 @@ select * from crypto_tracking_platforms;
 select * from scraped_tokens;
 
 select * from crypto_tracking_platforms;
+select * from scraped_tokens
