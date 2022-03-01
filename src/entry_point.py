@@ -13,3 +13,9 @@
 
 #print(db.session.query(ScrapedToken).count())
 
+from dbm import HOLA
+from dbm.models.discovery_system import CryptoTrackingPlatform, ScrapedToken 
+
+HOLA.cinsert(CryptoTrackingPlatform('casd','asd','asdsad','asdsad'))
+
+print(HOLA.session.query(ScrapedToken).count())

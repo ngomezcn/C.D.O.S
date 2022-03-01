@@ -3,7 +3,7 @@ from sqlalchemy import TIME, Column, UniqueConstraint , create_engine, null
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.dialects.postgresql import DOUBLE_PRECISION, VARCHAR, TIMESTAMP, MONEY
-from ..core.db_manager import db, Base
+from dbm.core.db_manager import db, Base
 
 class CryptoTrackingPlatform(Base):
     __tablename__  = 'crypto_tracking_platforms'

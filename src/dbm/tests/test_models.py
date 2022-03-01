@@ -2,8 +2,8 @@ import sys
 import os
 import unittest
 
-#from db.models.discovery_system import CryptoTrackingPlatform, ScrapedToken, RawTokenToReview
-#from db.utils.orm import table_exists
+from dbm.models.discovery_system import CryptoTrackingPlatform, ScrapedToken, RawTokenToReview
+from dbm.utils.orm import table_exists
 
 class TestModels(unittest.TestCase):
 
@@ -42,6 +42,8 @@ class SubTest2(BaseTestCases.BaseTest):
         print('Calling SubTest2:testSub2')
         sub = 4
         self.assertEqual(sub, 4)
+
+print("gay")
 
 if __name__ == '__main__':
     unittest.main()
