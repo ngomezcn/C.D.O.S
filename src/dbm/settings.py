@@ -1,7 +1,7 @@
 import os
 from decouple import config
 
-DEBUG = False
+DEBUG = True
 
 # Database
 if DEBUG:
@@ -14,7 +14,8 @@ else:
     SERVER = 'taplock.app'
     DATABASE = 'cdos'
     USERNAME = 'cdos'
-    PASSWORD = config('PROD_DB_PASSWORD')
+    PASSWORD = '1234'
+    #PASSWORD = config('PROD_DB_PASSWORD')
     PORT = '5432'
 
 DATABASE_CONNECTION = f'postgresql://{USERNAME}:{PASSWORD}@{SERVER}:{PORT}/{DATABASE}'
