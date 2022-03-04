@@ -12,7 +12,6 @@
 #db.cinsert(CryptoTrackingPlatform('casd','asd','asdsad','asdsad'))
 
 #print(db.session.query(ScrapedToken).count())
-
 from dbm.core.manager import db
 from dbm.models.discovery_system import CryptoTrackingPlatform, ScrapedToken 
 
