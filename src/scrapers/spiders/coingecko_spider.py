@@ -5,18 +5,18 @@ import scrapy
 import os
 from datetime import datetime
 
-from scraper.scraper.utils.array_utils import *
-from scraper.scraper.utils.chain_utils import *
-from scraper.scraper.utils.logger import sprint
-from scraper.scraper.models.coin_model import *
-from scraper.scraper.models.chains_model import *
-from scraper.scraper.xpath import XpathCoingecko
+from scrapers.utils.array_utils import *
+from scrapers.utils.chain_utils import *
+from scrapers.utils.logger import sprint
+from scrapers.models.coin_model import *
+from scrapers.models.chains_model import *
+from scrapers.xpath import XpathCoingecko
 
 class CoingeckoSpider(scrapy.Spider):
     name = 'coingecko'
     start_urls = ['https://www.coingecko.com/en/coins/recently_added']
     custom_settings = {
-        'FEED_URI': '../out/spiders/coingecko/last_24h_new_tokens.json',
+        'FEED_URI': '../out/spiders/coingecko/24h_new_tokens.json',
         'FEED_FORMAT': 'json',
         'ROBOTSTXT-OBEY': False,
         'FEED_EXPORT_ENCODING': 'utf-8'

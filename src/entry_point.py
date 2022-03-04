@@ -19,14 +19,19 @@
 #db.cinsert(CryptoTrackingPlatform('casd','asd','asdsad','asdsad'))
 
 #print(db.session.query(ScrapedToken).count())
+from scrapers.spiders.coingecko_spider import CoingeckoSpider
 import scrapy
-from scrapy.crawler import CrawlerProcess
-from scraper.scraper.spiders.coingecko_spider import CoingeckoSpider
+from twisted.internet import reactor
+from scrapy.crawler import CrawlerRunner
+from scrapy.utils.log import configure_logging
+from scrapy.utils.project import get_project_settings
 
+configure_logging()
+settings = get_project_settings()
+runner = CrawlerRunner(settings)
+runner.crawl(CoingeckoSpider)
+#runner.crawl(AnotherSpider)
+d = runner.join()
+d.addBoth(lambda _: reactor.stop())
 
-process = CrawlerProcess({
-    'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
-})
-
-process.crawl(CoingeckoSpider)
-process.start() 
+reactor.run() # the script will block here until all crawling jobs are finished
