@@ -19,7 +19,7 @@
 #db.cinsert(CryptoTrackingPlatform('casd','asd','asdsad','asdsad'))
 
 #print(db.session.query(ScrapedToken).count())
-from scrapers.spiders.coingecko_spider import CoingeckoSpider
+from scraper.spiders.coingecko_spider import CoingeckoSpider
 import scrapy
 from twisted.internet import reactor
 from scrapy.crawler import CrawlerRunner

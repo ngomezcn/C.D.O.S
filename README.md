@@ -10,3 +10,7 @@
 - - Files: ```src/dbm/settings.py```
 - Run tests 
 - - ```python scripts/testing/run_tests.py```
+
+TODO:
+- Logger package
+- deploy.sh ()

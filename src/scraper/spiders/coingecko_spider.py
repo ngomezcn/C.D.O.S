@@ -5,12 +5,12 @@ import scrapy
 import os
 from datetime import datetime
 
-from scrapers.utils.array_utils import *
-from scrapers.utils.chain_utils import *
-from scrapers.utils.logger import sprint
-from scrapers.models.coin_model import *
-from scrapers.models.chains_model import *
-from scrapers.xpath import XpathCoingecko
+from scraper.utils.array_utils import *
+from scraper.utils.chain_utils import *
+from scraper.utils.logger import sprint
+from scraper.models.coin_model import *
+from scraper.models.chains_model import *
+from scraper.xpath import XpathCoingecko
 
 class CoingeckoSpider(scrapy.Spider):
     name = 'coingecko'
