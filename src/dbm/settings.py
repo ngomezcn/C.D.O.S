@@ -19,3 +19,5 @@ else:
     PORT = '5432'
 
 DATABASE_CONNECTION = f'postgresql://{USERNAME}:{PASSWORD}@{SERVER}:{PORT}/{DATABASE}'
+
+

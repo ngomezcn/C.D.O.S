@@ -1,5 +1,5 @@
 from ..models.discovery_system import *
-from ..core.db_manager import db
+from ..core.manager import db
 from sqlalchemy import false, table, true
 
 def table_exists(table):
