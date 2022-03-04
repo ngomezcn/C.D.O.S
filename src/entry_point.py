@@ -13,10 +13,10 @@
 
 #print(db.session.query(ScrapedToken).count())
 
-#from dbm.core.manager import db
-#from dbm.models.discovery_system import CryptoTrackingPlatform, ScrapedToken 
+from dbm.core.manager import db
+from dbm.models.discovery_system import CryptoTrackingPlatform, ScrapedToken 
 
-#db.cinsert(CryptoTrackingPlatform('casd','asd','asdsad','asdsad'))
+db.cinsert(CryptoTrackingPlatform('casd','asd','asdsad','asdsad'))
 
 #print(db.session.query(ScrapedToken).count())
 from scraper.spiders.coingecko_spider import CoingeckoSpider
