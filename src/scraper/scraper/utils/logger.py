@@ -16,24 +16,26 @@ def sprint(*argv):
 
 
 def log(*argv, sprint_log = False):
+    return None
     
-    folder = "logs"
-    master_log = folder + '/' + 'master.log'
-    today_log = folder + '/' + str(datetime.today().strftime('%Y-%m-%d')) + '.log'
+    root_folder = "logs"
     
-    if not exists(folder):
-        os.mkdir(folder)
+    master_file = root_folder + '/' + 'master.log'
+    today_file = root_folder + '/' + str(datetime.today().strftime('%Y-%m-%d')) + '.log'
+
+    if not exists(root_folder):
+        os.mkdir(root_folder)
         
-    if not exists(master_log):
-        with open(master_log, 'w'): pass
+    if not exists(master_file):
+        with open(master_file, 'w'): pass
         
-    if not exists(today_log):
-        with open(today_log, 'w'): pass
+    if not exists(today_file):
+        with open(today_file, 'w'): pass
     
     flog = format_log(argv, sprint_log)
 
-    write_to_file(master_log, flog)
-    write_to_file(today_log, flog)
+    write_to_file(master_file, flog)
+    write_to_file(today_file, flog)
 
 def write_to_file(file, str):
     file = open(file, 'a')

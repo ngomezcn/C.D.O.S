@@ -1,7 +1,5 @@
 
-import re
-
-from crypto_scraper.models.chains_model import *
+from scraper.scraper.models.chains_model import *
 
 def format_chain(url_image):
     bnb = 'https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png?1644979850'
