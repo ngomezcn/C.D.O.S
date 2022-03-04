@@ -5,7 +5,6 @@ from typing_extensions import Self
 from sqlalchemy import create_engine, insert
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, query, session
-from crypto_scraper.crypto_scraper.utils.logger import sprint
 from dbm.settings import DATABASE_CONNECTION
 from psycopg2.errors import UniqueViolation
 
