@@ -17,3 +17,5 @@
 2022-02-25 21:31:12: Finish spider coingecko Output ->  ../data/last_new_tokens.json 
 2022-02-25 21:31:16: Starting spider coingecko 
 2022-02-25 21:31:19: Finish spider coingecko  Output -> ../data/last_new_tokens.json 
+2022-03-04 20:01:40: Starting spider coingecko 
+2022-03-04 20:01:44: Finish spider coingecko  Output -> ../data/last_24h_new_tokens.json 

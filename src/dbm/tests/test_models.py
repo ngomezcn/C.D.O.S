@@ -17,7 +17,7 @@ class TestDiscoverySystem(unittest.TestCase):
         except Exception as exc:
             pytest.fail(pytrace=True, reason=exc.__cause__)
          
-    def test_exist_table_raw_RawTokenToReview(self):
+    def test_exist_table_RawTokenToReview(self):
         try:
             table_exists(RawTokenToReview)
         except Exception as exc:
