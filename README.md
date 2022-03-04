@@ -5,7 +5,7 @@
 - - Linux: ```source venv/scripts/activate```
 - - Windows: ```venv/Scripts/activate```
 - Install dependencies: 
-- - ```pip install python-decouple psycopg2 sqlalchemy scrapy pytest``` OR ```pip install -r requeriments.txt```
+- - ```pip install python-decouple psycopg2 sqlalchemy scrapy pytest``` (avoid using requirements.txt)
 - Configure settings
 - - Files: ```src/dbm/settings.py```
 - Run tests 
