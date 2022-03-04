@@ -13,9 +13,3 @@ for modul in modules:
 
 arguments.extend(modules_abosulte_paths)
 pytest.main(arguments)
-
-#class MyPlugin:
-#    def pytest_sessionfinish(self):
-#        print("*** test run reporting finishing", end='')
-#pytest.main(arguments, plugins=[MyPlugin()])
-    

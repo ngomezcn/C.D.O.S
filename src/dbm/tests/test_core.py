@@ -1,13 +1,12 @@
 import pytest
 import unittest
-from sqlalchemy.ext.declarative import declarative_base
-from dbm.core.manager import *
-
+from dbm.core.manager import DbmManager
+from dbm.settings import DATABASE_CONNECTION
 class TestCore(unittest.TestCase):
 
     def test_database_connection(self):
         try:
-            dbm.connectToDatabase()
+            DbmManager(DATABASE_CONNECTION)
         except Exception as exc:
             pytest.fail(pytrace=True, reason=exc.__cause__)
 

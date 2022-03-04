@@ -9,35 +9,35 @@ from crypto_scraper.crypto_scraper.utils.logger import sprint
 from dbm.settings import DATABASE_CONNECTION
 from psycopg2.errors import UniqueViolation
 
-class Connect():
+class DbmManagerConnection():
     connection = None
     engine = None
     connection_url = None
-
-    def __init__(self, connection_url):
-        self.connection_url = connection_url
-
-    def connectToDatabase(self):
+    
+    def connect(self):
         try:
             self.engine = create_engine(self.connection_url)
             self.connection = self.engine.connect()     
-            return True
         except Exception as exc:
             print(exc)
             raise Exception
 
-class Session(Connect):
+    def __init__(self, connection_url):
+        self.connection_url = connection_url
+        return self.connect()
+
+class DbmManagerSession(DbmManagerConnection):
     session = None
-    base = None
+    dbase = None
     
     def __init__(self, connection_url):
         super().__init__(connection_url)
         
         Session = sessionmaker(bind=self.engine)
         self.session = Session()
-        self.base = declarative_base()
+        self.dbase = declarative_base()
      
-class DbInterface(Session):
+class DbmManager(DbmManagerSession):
     
     def insert(self, obj):
         try:
@@ -62,6 +62,6 @@ class DbInterface(Session):
         
     def __init__(self, connection_url):
         super().__init__(connection_url)
-    
-dbase = declarative_base()    
-dbm = DbInterface(DATABASE_CONNECTION)
+        
+Base = declarative_base()
+db = DbmManager(DATABASE_CONNECTION)
