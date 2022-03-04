@@ -103,12 +103,3 @@ CREATE  TABLE price_tracked_tokens (
 	CONSTRAINT fk_tracked_tokens FOREIGN KEY (token_contract) REFERENCES tokens(token_contract),
 	CONSTRAINT fk_ptp_id FOREIGN KEY (ptp_id) REFERENCES price_tracking_platforms(ptp_id)
 );
-
-drop table scraped_tokens cascade;
-
-select * from crypto_tracking_platforms;
-
-select * from scraped_tokens;
-
-select * from crypto_tracking_platforms;
-select * from scraped_tokens
