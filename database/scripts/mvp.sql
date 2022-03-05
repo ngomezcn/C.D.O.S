@@ -80,18 +80,17 @@ CREATE  TABLE wallet_assets_tokens (
 	CONSTRAINT fk_token_contract FOREIGN KEY (token_contract) REFERENCES tokens(token_contract)
 );
 
-CREATE TABLE raw_token_to_review (
-    uri                  varchar,
+CREATE TABLE raw_discovered_token (
 	token_id             varchar  NOT NULL,
 	ctp_id               varchar  NOT NULL,
-	href               varchar  NOT NULL,
+	url_path               varchar  NOT NULL,
 	token_name           varchar  NOT NULL,
 	discovery_timestamp  timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	chain_name           varchar  NOT NULL,
 	contract             varchar  NOT NULL,
 	value                money    NOT NULL,
 	listed_timestamp     timestamp NOT NULL,
-	CONSTRAINT pk_new_tokens_discovered PRIMARY KEY (uri),
+	CONSTRAINT pk_raw_discovered_token PRIMARY KEY (token_id),
 	CONSTRAINT fk_ctp_id FOREIGN KEY (ctp_id) REFERENCES crypto_tracking_platforms(ctp_id)
 );
 
@@ -105,3 +104,8 @@ CREATE  TABLE price_tracked_tokens (
 	CONSTRAINT fk_tracked_tokens FOREIGN KEY (token_contract) REFERENCES tokens(token_contract),
 	CONSTRAINT fk_ptp_id FOREIGN KEY (ptp_id) REFERENCES price_tracking_platforms(ptp_id)
 );
+
+insert into crypto_tracking_platforms (ctp_id, domain, ip, root_https) VALUES ('coingecko', 'coingecko.com', '104.18.4.127', 'https://www.coingecko.com');
+insert into crypto_tracking_platforms (ctp_id, domain, ip, root_https) VALUES ('coinbase', 'coinbase.com', '104.18.7.10', 'https://www.coinbase.com/');
+
+select * from raw_discovered_token;

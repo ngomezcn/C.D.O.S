@@ -21,19 +21,19 @@ class TestDiscoverySystem(unittest.TestCase):
          
     def test_exist_table_RawTokenToReview(self):
         try:
-            table_exists(tables.raw_token_to_review)
+            table_exists(tables.raw_discovered_token)
         except Exception as exc:
             pytest.fail(pytrace=True, reason=exc.__cause__)
 
 class TestTrackingSystem(unittest.TestCase):
     
-    def test_price_tracked_tokens(self):
+    def test_exist_table_price_tracked_tokens(self):
         try:
             table_exists(tables.price_tracked_tokens)
         except Exception as exc:
             pytest.fail(pytrace=True, reason=exc.__cause__)
             
-    def test_price_tracked_tokens(self):
+    def test_exist_table_price_tracked_tokens(self):
         try:
             table_exists(tables.price_tracking_platforms)
         except Exception as exc:

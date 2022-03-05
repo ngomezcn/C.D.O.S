@@ -53,8 +53,11 @@ class DbmManager(DbmManagerSession):
             
     def cinsert(self, obj):
         self.insert(obj)
-        self.commit()
-        
+        try:
+            self.commit()
+        except Exception as e:
+            return True
+        return False
     def get(self, table, param):
         
         return self.session.query(table).get(param)

@@ -37,11 +37,11 @@ class ScrapedToken(Base):
         self.listed_timestamp = listed_timestamp
         self.pk = uri
 
-class RawTokenToReview(Base):      
-    __tablename__  = 'raw_token_to_review'
+class RawDiscoveredToken(Base):      
+    __tablename__  = 'raw_discovered_token'
     
-    uri = Column(VARCHAR, primary_key=True)
-    token_id = Column(VARCHAR)
+    token_id = Column(VARCHAR, primary_key=True)
+    url_path = Column(VARCHAR)
     ctp_id = Column(VARCHAR)
     token_name = Column(VARCHAR)
     discovery_timestamp = Column(TIMESTAMP)
@@ -49,7 +49,6 @@ class RawTokenToReview(Base):
     chain_name = Column(VARCHAR)
     value = Column(MONEY)
     listed_timestamp = Column(TIMESTAMP)
-    href = Column(VARCHAR)
 
     def __init__(self):
         pass

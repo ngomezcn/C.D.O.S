@@ -15,3 +15,6 @@ def is_over_a_day(str):
             return True
 
     return False
+
+def dirty_str_to_int(str):
+    str = str.strip('\n').strip(' ')
