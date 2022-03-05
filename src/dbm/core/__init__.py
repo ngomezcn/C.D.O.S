@@ -1,0 +1,1 @@
+from dbm.core.manager import db as db

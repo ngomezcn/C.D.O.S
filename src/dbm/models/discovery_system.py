@@ -4,6 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.dialects.postgresql import DOUBLE_PRECISION, VARCHAR, TIMESTAMP, MONEY
 from dbm.core.manager import Base
+
 class CryptoTrackingPlatform(Base):
     __tablename__  = 'crypto_tracking_platforms'
     

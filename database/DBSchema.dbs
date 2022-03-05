@@ -178,8 +178,8 @@
 		<entity schema="public" name="wallet_assets_tokens" color="BED3F4" x="512" y="192" />
 		<entity schema="public" name="wallets" color="BED3F4" x="576" y="80" />
 		<group name="Price Tracking System" color="008000" >
-			<entity schema="public" name="price_tracked_tokens" />
 			<entity schema="public" name="price_tracking_platforms" />
+			<entity schema="public" name="price_tracked_tokens" />
 		</group>
 		<group name="Blockchain" color="FFFF00" >
 			<entity schema="public" name="tokens" />
