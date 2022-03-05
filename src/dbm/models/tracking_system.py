@@ -17,5 +17,10 @@ class PriceTrackedTokens(Base):
         self.tracked_since = tracked_since
         self.last_update = last_update
         
-        
-        
+class PriceTrackingPlatforms(Base):
+    __table__name = 'price_tracking_platforms'
+    
+    ptp_id = Column(VARCHAR)
+    domain = Column(VARCHAR)
+    ip = Column(VARCHAR(15))
+    root_https = Column(VARCHAR)
