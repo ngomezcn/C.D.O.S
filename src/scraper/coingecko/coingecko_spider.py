@@ -38,7 +38,7 @@ class CoingeckoSpider(scrapy.Spider):
         discovered_token.contract = response.xpath(XpathCoingecko.token.contract).get()
         discovered_token.chain_name = format_chain(response.xpath(XpathCoingecko.token.chain).get())
         discovered_token.ctp_id = 'coingecko'
-        discovered_token.discovery_timestamp = datetime.now().replace(microsecond=0)
+        discovered_token.discovery_timestamp = std.get_timestamp()
         discovered_token.value = float(response.xpath(XpathCoingecko.token.price).get()[1:].replace(',', ''))
         
         if(discovered_token.contract == discovered_token.token_name.lower()): 
