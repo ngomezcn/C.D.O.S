@@ -24,7 +24,7 @@
 		<table name="crypto_tracking_platforms" >
 			<column name="ctp_id" type="varchar" decimal="0" jt="12" mandatory="y" />
 			<column name="domain" type="varchar" decimal="0" jt="12" mandatory="y" />
-			<column name="ip" type="varchar" length="11" decimal="0" jt="12" mandatory="y" />
+			<column name="ip" type="varchar" length="15" decimal="0" jt="12" mandatory="y" />
 			<column name="root_https" type="varchar" decimal="0" jt="12" mandatory="y" />
 			<index name="pk_ctp_id" unique="PRIMARY_KEY" >
 				<column name="ctp_id" />
@@ -52,24 +52,25 @@
 		<table name="price_tracking_platforms" >
 			<column name="ptp_id" type="varchar" decimal="0" jt="12" mandatory="y" />
 			<column name="domain" type="varchar" decimal="0" jt="12" mandatory="y" />
-			<column name="ip" type="varchar" length="12" decimal="0" jt="12" mandatory="y" />
+			<column name="ip" type="varchar" length="15" decimal="0" jt="12" mandatory="y" />
 			<column name="root_https" type="varchar" decimal="0" jt="12" mandatory="y" />
 			<index name="pk_ptp_id" unique="PRIMARY_KEY" >
 				<column name="ptp_id" />
 			</index>
 		</table>
-		<table name="raw_scraped_tokens" >
+		<table name="raw_discovered_token" >
 			<column name="token_id" type="varchar" decimal="0" jt="12" mandatory="y" />
 			<column name="ctp_id" type="varchar" decimal="0" jt="12" mandatory="y" />
+			<column name="url_path" type="varchar" decimal="0" jt="12" mandatory="y" />
 			<column name="token_name" type="varchar" decimal="0" jt="12" mandatory="y" />
 			<column name="discovery_timestamp" type="timestamp" decimal="6" jt="93" mandatory="y" >
 				<defo><![CDATA[CURRENT_TIMESTAMP]]></defo>
 			</column>
-			<column name="chain_name" type="varchar" decimal="0" jt="12" mandatory="y" />
-			<column name="value" type="money" decimal="0" jt="3" mandatory="y" />
+			<column name="chain_name" type="varchar" length="500" decimal="0" jt="12" mandatory="y" />
+			<column name="contract" type="varchar" decimal="0" jt="12" mandatory="y" />
+			<column name="price" type="money" decimal="0" jt="3" mandatory="y" />
 			<column name="listed_timestamp" type="timestamp" decimal="6" jt="93" mandatory="y" />
-			<column name="uri" type="varchar" decimal="0" jt="12" />
-			<index name="pk_new_tokens_discovered" unique="PRIMARY_KEY" >
+			<index name="pk_raw_discovered_token" unique="PRIMARY_KEY" >
 				<column name="token_id" />
 			</index>
 			<fk name="fk_ctp_id" to_schema="public" to_table="crypto_tracking_platforms" >
@@ -79,9 +80,9 @@
 		<table name="scraped_tokens" >
 			<column name="uri" type="varchar" decimal="0" jt="12" mandatory="y" />
 			<column name="token_id" type="varchar" decimal="0" jt="12" mandatory="y" />
-			<column name="ctp_name_id" type="varchar" decimal="0" jt="12" mandatory="y" />
 			<column name="discovery_timestamp" type="timestamp" decimal="6" jt="93" mandatory="y" />
 			<column name="listed_timestamp" type="timestamp" decimal="6" jt="93" mandatory="y" />
+			<column name="ctp_id" type="varchar" decimal="0" jt="12" mandatory="y" />
 			<index name="pk_uri_token_id" unique="PRIMARY_KEY" >
 				<column name="uri" />
 			</index>
@@ -89,7 +90,7 @@
 				<column name="token_id" />
 			</index>
 			<fk name="fk_ctp_name_id" to_schema="public" to_table="crypto_tracking_platforms" >
-				<fk_column name="ctp_name_id" pk="ctp_id" />
+				<fk_column name="ctp_id" pk="ctp_id" />
 			</fk>
 		</table>
 		<table name="tokens" >
@@ -102,7 +103,6 @@
 			<column name="launched_timestamp" type="timestamp" decimal="6" jt="93" />
 			<column name="price_history" type="json" decimal="0" jt="2000" mandatory="y" />
 			<column name="token_name" type="varchar" decimal="0" jt="12" mandatory="y" />
-			<column name="listed_timestamp" type="timestamp" decimal="6" jt="93" mandatory="y" />
 			<index name="pk_token_contract" unique="PRIMARY_KEY" >
 				<column name="token_contract" />
 			</index>
@@ -168,18 +168,18 @@
 		<comment><![CDATA[PostgreSQL]]></comment>
 		<entity schema="public" name="chains" color="BED3F4" x="704" y="416" />
 		<entity schema="public" name="coins" color="BED3F4" x="864" y="432" />
-		<entity schema="public" name="crypto_tracking_platforms" color="BED3F4" x="736" y="704" />
+		<entity schema="public" name="crypto_tracking_platforms" color="BED3F4" x="800" y="640" />
 		<entity schema="public" name="price_tracked_tokens" color="C7F4BE" x="48" y="640" />
 		<entity schema="public" name="price_tracking_platforms" color="C7F4BE" x="288" y="640" />
-		<entity schema="public" name="raw_scraped_tokens" color="BED3F4" x="512" y="800" />
-		<entity schema="public" name="scraped_tokens" color="BED3F4" x="512" y="640" />
+		<entity schema="public" name="raw_discovered_token" color="3986C1" x="528" y="816" />
+		<entity schema="public" name="scraped_tokens" color="BED3F4" x="560" y="640" />
 		<entity schema="public" name="tokens" color="BED3F4" x="512" y="368" />
 		<entity schema="public" name="wallet_assets_coins" color="BED3F4" x="704" y="192" />
 		<entity schema="public" name="wallet_assets_tokens" color="BED3F4" x="512" y="192" />
 		<entity schema="public" name="wallets" color="BED3F4" x="576" y="80" />
 		<group name="Price Tracking System" color="008000" >
-			<entity schema="public" name="price_tracking_platforms" />
 			<entity schema="public" name="price_tracked_tokens" />
+			<entity schema="public" name="price_tracking_platforms" />
 		</group>
 		<group name="Blockchain" color="FFFF00" >
 			<entity schema="public" name="tokens" />
@@ -192,9 +192,9 @@
 			<entity schema="public" name="wallets" />
 		</group>
 		<group name="Token Discovery System" color="800080" >
-			<entity schema="public" name="raw_scraped_tokens" />
-			<entity schema="public" name="crypto_tracking_platforms" />
+			<entity schema="public" name="raw_discovered_token" />
 			<entity schema="public" name="scraped_tokens" />
+			<entity schema="public" name="crypto_tracking_platforms" />
 		</group>
 	</layout>
 	<layout name="~Layout with Sample Tools" id="Layout-2106" show_column_type="y" show_relation="columns" >
@@ -203,7 +203,6 @@
 		<entity schema="public" name="crypto_tracking_platforms" color="BED3F4" x="624" y="48" />
 		<entity schema="public" name="price_tracked_tokens" color="C7F4BE" x="1248" y="48" />
 		<entity schema="public" name="price_tracking_platforms" color="C7F4BE" x="1536" y="48" />
-		<entity schema="public" name="raw_scraped_tokens" color="BED3F4" x="896" y="48" />
 		<entity schema="public" name="scraped_tokens" color="BED3F4" x="624" y="352" />
 		<entity schema="public" name="tokens" color="BED3F4" x="304" y="48" />
 		<entity schema="public" name="wallet_assets_coins" color="BED3F4" x="592" y="736" />
@@ -233,7 +232,6 @@ FROM
 				<column name="launched_timestamp" />
 				<column name="price_history" />
 				<column name="token_name" />
-				<column name="listed_timestamp" />
 				<query_table schema="public" name="wallet_assets_tokens" alias="wat" x="272" y="48" fk="fk_token_contract" type="Inner Join" >
 					<column name="wallet_address" />
 					<column name="token_contract" />
