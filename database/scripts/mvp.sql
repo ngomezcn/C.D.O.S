@@ -86,14 +86,13 @@ CREATE TABLE raw_discovered_token (
 	url_path               varchar  NOT NULL,
 	token_name           varchar  NOT NULL,
 	discovery_timestamp  timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	chain_name           varchar  NOT NULL,
+	chain_name           varchar(500)  NOT NULL,
 	contract             varchar  NOT NULL,
-	value                money    NOT NULL,
+	price                money    NOT NULL,
 	listed_timestamp     timestamp NOT NULL,
 	CONSTRAINT pk_raw_discovered_token PRIMARY KEY (token_id),
 	CONSTRAINT fk_ctp_id FOREIGN KEY (ctp_id) REFERENCES crypto_tracking_platforms(ctp_id)
 );
-
 
 CREATE  TABLE price_tracked_tokens (
 	token_contract       varchar  NOT NULL,

@@ -33,7 +33,7 @@ class TestTrackingSystem(unittest.TestCase):
         except Exception as exc:
             pytest.fail(pytrace=True, reason=exc.__cause__)
             
-    def test_exist_table_price_tracked_tokens(self):
+    def test_exist_table_price_tracking_platforms(self):
         try:
             table_exists(tables.price_tracking_platforms)
         except Exception as exc:

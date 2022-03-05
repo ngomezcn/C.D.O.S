@@ -6,8 +6,8 @@ def sprint(*argv):
     
     rprint = ""
     for i in argv:
-        rprint += ''.join(i).strip("\n")+" "
-        
+        #rprint += ''.join(i).strip("\n")+" "
+        pass
     
     print("="*len(rprint))
     log(rprint, sprint_log=True)

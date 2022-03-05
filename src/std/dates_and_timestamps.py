@@ -1,6 +1,8 @@
 from datetime import datetime
 
-
 def get_timestamp():
-    return datetime.now().replace(microsecond=0)
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+
+   
     

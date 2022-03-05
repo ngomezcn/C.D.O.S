@@ -8,7 +8,7 @@ class XpathCoingecko():
             
     class token():
         contract = "//i/@data-address"
-        chain = "//div[@class='tw-px-2.5 tw-flex tw-items-center tw-justify-center tw-py-1 tw-h-7 tw-my-0.5 tw-rounded-md  tw-text-sm tw-font-medium tw-bg-gray-100 tw-text-gray-800 dark:tw-text-white dark:tw-bg-opacity-10 hover:tw-bg-gray-200 dark:hover:tw-bg-opacity-20 tw-rounded-l-md']/span[@class='text-muted mr-2']/span/img/@src"
+        chain = "//span/img/@src"
         price = "//div[@class='tw-text-4xl tw-font-bold tw-my-2 tw-flex tw-items-center']/span[@class='tw-text-gray-900 dark:tw-text-white tw-text-3xl']/span[@class='no-wrap']/text()"
 class XpathPoocoin():
     class tokens():

@@ -47,7 +47,7 @@ class RawDiscoveredToken(Base):
     discovery_timestamp = Column(TIMESTAMP)
     contract = Column(VARCHAR)
     chain_name = Column(VARCHAR)
-    value = Column(MONEY)
+    price = Column(MONEY)
     listed_timestamp = Column(TIMESTAMP)
 
     def __init__(self):

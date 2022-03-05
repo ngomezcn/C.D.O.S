@@ -3,20 +3,18 @@ from cgitb import text
 import imp
 import scrapy
 import os
-import std
+from std import dates_and_timestamps as std
 
 from scraper.utils.array_utils import *
 from scraper.utils.chain_utils import *
 from scraper.utils.logger import sprint
 from scraper.utils.time_format import time_since_added_to_date
-
-from scraper.models.coin_model import *
-from scraper.models.chains_model import *
 from scraper.xpath import XpathCoingecko
 from dbm.models import tables
 from dbm.core import db
 class CoingeckoSpider(scrapy.Spider):
     name = 'coingecko'
+    
     start_urls = ['https://www.coingecko.com/en/coins/recently_added']
     custom_settings = {
         #'FEED_URI': '../out/spiders/coingecko/24h_new_tokens.json',
@@ -25,26 +23,47 @@ class CoingeckoSpider(scrapy.Spider):
         'FEED_EXPORT_ENCODING': 'utf-8'
     }
 
+    def parse_kwargs(self, kwargs):
+        class parsed_kwargs():
+            token_id = kwargs['token_id']
+            token_name = kwargs['token_name']
+            url_path = kwargs['url_path']
+            listed_timestamp = kwargs['time_since_added']
+            
+        return parsed_kwargs()
+    
+    def get_contract(self, response, token_name):
+        contract = response.xpath(XpathCoingecko.token.contract).get()
+        if(contract == token_name): 
+            return 'null'
+        return contract
+    
+    def get_chain(self, response):
+        return format_chain(response.xpath(XpathCoingecko.token.chain).get())
+    
+    def get_price(self, response):
+        return float(response.xpath(XpathCoingecko.token.price).get()[1:].replace(',', ''))
+    
+    def get_listed_timestamp(self, response):
+        # TODO: Finish that
+        return std.get_timestamp() #- kwargs['time_since_added']
+    
     def parse_raw_discovered_token(self, response, **kwargs):
+
+        dt = tables.raw_discovered_token() 
         
-        discovered_token = tables.raw_discovered_token()
+        # Building token
+        dt.token_id            = self.parse_kwargs(kwargs=kwargs).token_id
+        dt.token_name          = self.parse_kwargs(kwargs=kwargs).token_name
+        dt.url_path            = self.parse_kwargs(kwargs=kwargs).url_path
+        dt.listed_timestamp    = self.get_listed_timestamp(response)
+        dt.contract            = self.get_contract(response, dt.token_name)
+        dt.chain_name          = self.get_chain(response)
+        dt.ctp_id              = 'coingecko'
+        dt.discovery_timestamp = std.get_timestamp()
+        dt.price               = self.get_price(response)
         
-        if kwargs:
-            discovered_token.token_id = kwargs['token_id']
-            discovered_token.token_name = kwargs['token_name']
-            discovered_token.url_path = kwargs['url_path']
-            discovered_token.listed_timestamp = std.get_timestamp() #- kwargs['time_since_added']
-        
-        discovered_token.contract = response.xpath(XpathCoingecko.token.contract).get()
-        discovered_token.chain_name = format_chain(response.xpath(XpathCoingecko.token.chain).get())
-        discovered_token.ctp_id = 'coingecko'
-        discovered_token.discovery_timestamp = std.get_timestamp()
-        discovered_token.value = float(response.xpath(XpathCoingecko.token.price).get()[1:].replace(',', ''))
-        
-        if(discovered_token.contract == discovered_token.token_name.lower()): 
-            discovered_token.contract = 'null'
-        
-        db.cinsert(discovered_token)
+        db.cinsert(dt) # Insert and commit new token to DataBase
         yield 
 
     def parse(self, response, **kwargs):
