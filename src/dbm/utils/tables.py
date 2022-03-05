@@ -1,4 +1,4 @@
-from dbm.models.discovery_system import *
+from dbm.models.token_discovery_system import *
 from dbm.core.manager import db
 
 def table_exists(table):
