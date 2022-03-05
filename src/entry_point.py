@@ -12,27 +12,28 @@
 #db.cinsert(CryptoTrackingPlatform('casd','asd','asdsad','asdsad'))
 
 #print(db.session.query(ScrapedToken).count())
-from dbm.core.manager import db
+#from dbm.core.manager import db
 #from dbm.models.discovery_system import crypto_tracking_platform, scraped_token 
-from dbm.models import tables
+#from dbm.models import tables
 
 
-db.cinsert(tables.crypto_tracking_platform('casd','asd','asdsad','asdsad'))
+#db.cinsert(tables.crypto_tracking_platform('casd','asd','asdsad','asdsad'))
 
 #print(db.session.query(ScrapedToken).count())
-from scraper.spiders.coingecko_spider import CoingeckoSpider
-import scrapy
-from twisted.internet import reactor
-from scrapy.crawler import CrawlerRunner
-from scrapy.utils.log import configure_logging
-from scrapy.utils.project import get_project_settings
 
-configure_logging()
-settings = get_project_settings()
-runner = CrawlerRunner(settings)
-runner.crawl(CoingeckoSpider)
+#from scraper.spiders.coingecko_spider import CoingeckoSpider
+#import scrapy
+#from twisted.internet import reactor
+#from scrapy.crawler import CrawlerRunner
+#from scrapy.utils.log import configure_logging
+#from scrapy.utils.project import get_project_settings
+
+#configure_logging()
+#settings = get_project_settings()
+#runner = CrawlerRunner(settings)
+#runner.crawl(CoingeckoSpider, input)
 #runner.crawl(AnotherSpider)
-d = runner.join()
-d.addBoth(lambda _: reactor.stop())
+#d = runner.join()
+#d.addBoth(lambda _: reactor.stop())
 
-reactor.run() # the script will block here until all crawling jobs are finished
+#reactor.run()

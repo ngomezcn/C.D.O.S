@@ -3,7 +3,7 @@ from cgitb import text
 import imp
 import scrapy
 import os
-from datetime import datetime
+import std
 
 from scraper.utils.array_utils import *
 from scraper.utils.chain_utils import *
@@ -33,19 +33,18 @@ class CoingeckoSpider(scrapy.Spider):
             discovered_token.token_id = kwargs['token_id']
             discovered_token.token_name = kwargs['token_name']
             discovered_token.url_path = kwargs['url_path']
-            discovered_token.listed_timestamp = datetime.now() #- kwargs['time_since_added']
+            discovered_token.listed_timestamp = std.get_timestamp() #- kwargs['time_since_added']
         
         discovered_token.contract = response.xpath(XpathCoingecko.token.contract).get()
         discovered_token.chain_name = format_chain(response.xpath(XpathCoingecko.token.chain).get())
         discovered_token.ctp_id = 'coingecko'
-        discovered_token.discovery_timestamp = datetime.now()
+        discovered_token.discovery_timestamp = datetime.now().replace(microsecond=0)
         discovered_token.value = float(response.xpath(XpathCoingecko.token.price).get()[1:].replace(',', ''))
         
-        if(discovered_token.contract == discovered_token.token_name.lower()):
+        if(discovered_token.contract == discovered_token.token_name.lower()): 
             discovered_token.contract = 'null'
         
         db.cinsert(discovered_token)
-        
         yield 
 
     def parse(self, response, **kwargs):
