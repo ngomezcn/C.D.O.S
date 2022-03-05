@@ -49,16 +49,7 @@ class RawTokenToReview(Base):
     chain_name = Column(VARCHAR)
     value = Column(MONEY)
     listed_timestamp = Column(TIMESTAMP)
+    href = Column(VARCHAR)
 
-    def __init__(self, uri, token_id, ctp_id, token_name, discovery_timestamp, contract, chain_name, value, listed_timestamp):
-        self.uri = uri
-        self.token_id = token_id
-        self.ctp_id = ctp_id
-        self.token_name = token_name
-        self.discovery_timestamp = discovery_timestamp
-        self.contract = contract
-        self.contract = contract
-        self.chain_name = chain_name
-        self.value = value
-        self.listed_timestamp = listed_timestamp
-       
+    def __init__(self):
+        pass

@@ -11,6 +11,7 @@ from scraper.utils.logger import sprint
 from scraper.models.coin_model import *
 from scraper.models.chains_model import *
 from scraper.xpath import XpathCoingecko
+from dbm.models import tables
 
 class CoingeckoSpider(scrapy.Spider):
     name = 'coingecko'
@@ -30,15 +31,27 @@ class CoingeckoSpider(scrapy.Spider):
         sprint("Finish spider", self.name, "\n Output ->", self.custom_settings['FEED_URI'])
 
     def parse_coin(self, response, **kwargs):
+        
+        token = tables.raw_token_to_review()
+        
         if kwargs:
-            coin = Coin(
-                name=kwargs['name'],
-                id=kwargs['id'],
-                href=kwargs['href']
-            )
+            token.token_name = kwargs['name']
+            token.token_id = kwargs['id']
+            token.href = kwargs['href']
         
         coin.contract = response.xpath(XpathCoingecko.coin.contract).get()
         coin.chain = format_chain(response.xpath(XpathCoingecko.coin.chain).get())
+        
+        #tables.raw_token_to_review(
+        #    token_id=coin.id,
+        #    token_name=coin.name,
+        #    discovery_timestamp=coin.tracking_date,
+        #    contract=coin.contract,
+        #    chain_name=coin.chain,
+        #    value=,
+        #    listed_timestamp=,
+        #    ctp_id=,
+        #    )
         
         yield {
             coin.name: {

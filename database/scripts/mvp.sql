@@ -84,6 +84,7 @@ CREATE TABLE raw_token_to_review (
     uri                  varchar,
 	token_id             varchar  NOT NULL,
 	ctp_id               varchar  NOT NULL,
+	href               varchar  NOT NULL,
 	token_name           varchar  NOT NULL,
 	discovery_timestamp  timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	chain_name           varchar  NOT NULL,
@@ -93,6 +94,7 @@ CREATE TABLE raw_token_to_review (
 	CONSTRAINT pk_new_tokens_discovered PRIMARY KEY (uri),
 	CONSTRAINT fk_ctp_id FOREIGN KEY (ctp_id) REFERENCES crypto_tracking_platforms(ctp_id)
 );
+
 
 CREATE  TABLE price_tracked_tokens (
 	token_contract       varchar  NOT NULL,

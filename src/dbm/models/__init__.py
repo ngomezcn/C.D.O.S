@@ -1,6 +1,6 @@
 from dbm.models import price_tracking_system, token_discovery_system
 
-class table():
+class tables():
     # Discovery System
     crypto_tracking_platform = token_discovery_system.CryptoTrackingPlatform
     scraped_token = token_discovery_system.ScrapedToken
