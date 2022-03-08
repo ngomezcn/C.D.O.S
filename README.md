@@ -1,6 +1,6 @@
 #### Deploy
-- Clone repo ```git clone https://github.com/ngomezcn/C.D.O.S```
-- Create venv on root ```python -m venv venv```
+- Clone repo ```git clone https://github.com/ngomezcn/cdos```
+- Create venv on root ```cd cdos && python -m venv venv```
 - Activate venv
 - - Linux: ```source venv/scripts/activate```
 - - Windows: ```venv/Scripts/activate```
