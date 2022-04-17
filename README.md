@@ -13,4 +13,4 @@
 
 TODO:
 - Logger package
-- deploy.sh (long term)
+- deploy.sh 
