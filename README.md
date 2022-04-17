@@ -7,7 +7,7 @@
 - Install dependencies: 
 - - ```pip install python-decouple psycopg2 sqlalchemy scrapy pytest``` (avoid using requirements.txt)
 - Configure settings
-- - Files: ```src/dbm/settings.py```
+- - Config database manager: ```src/dbm/settings.py```
 - Run tests 
 - - ```python scripts/testing/run_tests.py```
 
