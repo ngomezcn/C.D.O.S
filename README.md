@@ -1,3 +1,13 @@
+
+Template/example setup of web scraper with SQL database persistence and unittest
+
+#### Tech
+- Python
+- PostgreSQL
+- Scrapy
+- Unittest
+- SQLalchemy 
+
 #### Deploy
 - Clone repo ```git clone https://github.com/ngomezcn/cdos```
 - Create venv on root ```cd cdos && python -m venv venv```
